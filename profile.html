@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hồ sơ | Thợ Ơi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/shared-styles.css" rel="stylesheet">
+    <style>
+        :root { --primary-color: #0d6efd; --dark-bg: #1a1d20; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f8f9fa; padding-top: 70px; }
+        * { -webkit-tap-highlight-color: transparent !important; }
+
+        /* --- NAVBAR --- */
+        header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
+        .navbar { padding: 5px 0 !important; }
+      .navbar-brand img { 
+    height: 110px !important; /* Tăng số này lên nếu muốn to hơn nữa */
+    width: auto; 
+    margin: -10px 0 !important; /* Mẹo để to ra mà không làm cao thanh menu */
+}
+        .navbar-nav .nav-link {
+            color: #666 !important; font-weight: 500; padding: 8px 15px !important;
+            transition: 0.3s; position: relative;
+        }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: var(--primary-color) !important; font-weight: 700; }
+
+        @media (min-width: 992px) {
+            .navbar-nav .nav-link::after {
+                content: ''; position: absolute; bottom: 0; left: 15px;
+                width: 0; height: 2px; background-color: var(--primary-color); transition: 0.3s;
+            }
+            .navbar-nav .nav-link:hover::after, .navbar-nav .nav-link.active::after { width: calc(100% - 30px); }
+        }
+
+        /* Mobile Menu */
+       @media (max-width: 991px) {
+    /* Cho phép chữ xuống dòng nếu quá dài */
+    .offcanvas-body .nav-link {
+        white-space: normal !important; /* Quan trọng: giúp chữ xuống dòng */
+        word-wrap: break-word !important;
+        padding: 10px 15px !important;
+        line-height: 1.4 !important; /* Khoảng cách dòng vừa phải */
+        text-align: center !important;
+        width: 100% !important;
+    }
+
+    /* Hiệu ứng gạch chân cho mục đang chọn */
+    .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        left: 25%;
+        width: 50%;
+        height: 2px;
+        background-color: var(--primary-color);
+    }
+}
+
+        /* --- PROFILE CONTENT --- */
+        .profile-container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        .profile-card { background: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); overflow: hidden; margin-bottom: 30px; }
+        .profile-header { background: linear-gradient(135deg, var(--primary-color), #0056b3); color: white; padding: 30px; text-align: center; }
+        .profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 2rem; }
+        .profile-name { font-size: 1.5rem; font-weight: 700; margin-bottom: 5px; }
+        .profile-role { font-size: 0.95rem; opacity: 0.9; }
+        .profile-body { padding: 30px; }
+        .info-section { margin-bottom: 30px; }
+        .info-title { font-size: 1.2rem; font-weight: 700; color: #2c3e50; margin-bottom: 20px; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; }
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .info-item { background: #f8f9fa; padding: 15px; border-radius: 10px; border-left: 4px solid var(--primary-color); }
+        .info-label { font-weight: 600; color: #666; font-size: 0.9rem; margin-bottom: 5px; }
+        .info-value { font-weight: 500; color: #2c3e50; }
+        .worker-fields { display: none; }
+        .worker-fields.active { display: block; }
+        .edit-btn { background: var(--primary-color); border: none; padding: 10px 20px; border-radius: 8px; color: white; font-weight: 600; transition: 0.3s; }
+        .edit-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3); }
+        @media (max-width: 576px) {
+            .profile-container { padding: 20px 15px; }
+            .profile-header { padding: 20px; }
+            .profile-body { padding: 20px; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logomoi.png" alt="Thợ Ơi">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarMain">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="4_dich-vu.html">Dịch vụ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="9_blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="12_thu-vien.html">Thư viện</a></li>
+                    <li class="nav-item"><a class="nav-link" href="14_doi-ngu.html">Đội ngũ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="13_bang-gia.html">Bảng giá</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle"></i> Hồ sơ
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item" href="login.html">Đăng nhập</a></li>
+                            <li><a class="dropdown-item" href="register.html">Đăng ký</a></li>
+                        </ul>
+                    </li>
+                    <!-- User Menu -->
+                    <li class="nav-item dropdown" id="userMenu" style="display: none;">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle"></i>
+                            <span id="userName"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <!-- Customer items -->
+                            <li class="customer-only"><a class="dropdown-item" href="order-history.html"><i class="fas fa-shopping-cart me-2"></i>Quản lý tài khoản</a></li>
+                            <li class="customer-only"><a class="dropdown-item" href="profile.html"><i class="fas fa-map-marker-alt me-2"></i>Lịch sử đặt lịch</a></li>
+                            <li class="customer-only"><a class="dropdown-item" href="profile.html"><i class="fas fa-wallet me-2"></i>Liên hệ & Hỗ trợ</a></li>
+                            <!-- Worker items -->
+                            <li class="worker-only"><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Quản lý tài khoản</a></li>
+                            <li class="worker-only"><a class="dropdown-item" href="worker-dashboard.html"><i class="fas fa-tasks me-2"></i>Quản lí công việc</a></li>
+                            <li class="worker-only"><a class="dropdown-item" href="worker-dashboard.html"><i class="fas fa-wallet me-2"></i>Thu nhập & Ví</a></li>
+                            <!-- Common -->
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="authManager.logout()"><i class="fas fa-sign-out-alt me-2"></i>Đăng xuất</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <a href="15_dat-lich.html" class="btn btn-primary rounded-pill fw-bold">
+                            <i class="far fa-calendar-check me-2"></i> Đặt lịch
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <div class="profile-container">
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h3 class="profile-name" id="profileName">Tên người dùng</h3>
+                <p class="profile-role" id="profileRole">Vai trò</p>
+            </div>
+            <div class="profile-body">
+                <div class="info-section">
+                    <h4 class="info-title"><i class="fas fa-info-circle me-2"></i>Thông tin cá nhân</h4>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Họ và tên</div>
+                            <div class="info-value" id="fullName">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Email</div>
+                            <div class="info-value" id="email">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Số điện thoại</div>
+                            <div class="info-value" id="phone">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Ngày tạo tài khoản</div>
+                            <div class="info-value" id="createdAt">-</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section worker-fields" id="workerSection">
+                    <h4 class="info-title"><i class="fas fa-tools me-2"></i>Thông tin thợ</h4>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Kỹ năng chuyên môn</div>
+                            <div class="info-value" id="skills">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Kinh nghiệm (năm)</div>
+                            <div class="info-value" id="experience">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Giới tính</div>
+                            <div class="info-value" id="gender">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Ngày sinh</div>
+                            <div class="info-value" id="birthDate">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Địa chỉ</div>
+                            <div class="info-value" id="address">-</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Trạng thái xác minh</div>
+                            <div class="info-value" id="verificationStatus">-</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button class="edit-btn" onclick="editProfile()">
+                        <i class="fas fa-edit me-2"></i>Chỉnh sửa hồ sơ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/auth.js"></script>
+<script>
+    function loadProfile() {
+        if (!authManager.isLoggedIn()) {
+            window.location.href = 'login.html';
+            return;
+        }
+
+        const user = authManager.getCurrentUser();
+        if (!user) {
+            window.location.href = 'login.html';
+            return;
+        }
+
+        // Update profile info
+        document.getElementById('profileName').textContent = user.firstName;
+        document.getElementById('profileRole').textContent = user.role === 'customer' ? 'Khách hàng' : 'Thợ';
+        document.getElementById('fullName').textContent = user.fullName;
+        document.getElementById('email').textContent = user.email;
+        document.getElementById('phone').textContent = user.phone;
+        document.getElementById('createdAt').textContent = new Date(user.createdAt).toLocaleDateString('vi-VN');
+
+        // Show worker fields if user is worker
+        if (user.role === 'worker') {
+            document.getElementById('workerSection').classList.add('active');
+            document.getElementById('skills').textContent = user.skills || '-';
+            document.getElementById('experience').textContent = user.experience ? user.experience + ' năm' : '-';
+            document.getElementById('gender').textContent = user.gender === 'male' ? 'Nam' : user.gender === 'female' ? 'Nữ' : 'Khác';
+            document.getElementById('birthDate').textContent = user.birthDate ? new Date(user.birthDate).toLocaleDateString('vi-VN') : '-';
+            document.getElementById('address').textContent = user.address || '-';
+            document.getElementById('verificationStatus').textContent = user.verificationStatus === 'verified' ? 'Đã xác minh' : user.verificationStatus === 'pending' ? 'Đang chờ xác minh' : 'Từ chối';
+        }
+    }
+
+    function editProfile() {
+        alert('Tính năng chỉnh sửa hồ sơ sẽ được phát triển sau.');
+    }
+
+    // Load profile on page load
+    document.addEventListener('DOMContentLoaded', loadProfile);
+</script>
+</body>
+</html>

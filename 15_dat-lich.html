@@ -1,0 +1,531 @@
+
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt Lịch Dịch Vụ | Thợ Ơi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/shared-styles.css" rel="stylesheet">
+    
+    <style>
+        :root { --primary-color: #0d6efd; --dark-bg: #1a1d20; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f8f9fa; padding-top: 70px; }
+        * { -webkit-tap-highlight-color: transparent !important; }
+
+        /* --- NAVBAR --- */
+        header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
+        .navbar { padding: 5px 0 !important; }
+      .navbar-brand img { 
+    height: 110px !important; /* Tăng số này lên nếu muốn to hơn nữa */
+    width: auto; 
+    margin: -10px 0 !important; /* Mẹo để to ra mà không làm cao thanh menu */
+}        
+        .navbar-nav .nav-link {
+            color: #666 !important; font-weight: 500; padding: 8px 15px !important;
+            transition: 0.3s; position: relative;
+        }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: var(--primary-color) !important; font-weight: 700; }
+        
+        @media (min-width: 992px) {
+            .navbar-nav .nav-link::after {
+                content: ''; position: absolute; bottom: 0; left: 15px;
+                width: 0; height: 2px; background-color: var(--primary-color); transition: 0.3s;
+            }
+            .navbar-nav .nav-link:hover::after, .navbar-nav .nav-link.active::after { width: calc(100% - 30px); }
+        }
+
+        /* Mobile Menu */
+        @media (max-width: 991px) {
+            .custom-menu-popup { border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+            .nav-item { border-bottom: 1px solid #eee; width: 100%; text-align: center; }
+        } 
+
+.navbar { 
+    padding-top: 2px !important; 
+    padding-bottom: 2px !important; 
+    min-height: 55px; 
+    background: white !important; 
+}
+.navbar-nav .nav-link { 
+    color: #666 !important; 
+    font-weight: 500; 
+    padding: 5px 15px !important; 
+}
+.navbar-nav .nav-link.active { 
+    color: var(--primary-color) !important; 
+    font-weight: 700; 
+}
+/* Chỉnh nút Đặt lịch đồng bộ */
+.btn-primary.rounded-pill {
+    padding: 6px 20px !important;
+    font-size: 0.9rem;
+}
+
+        .booking-container { max-width: 850px; margin: 40px auto; background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+        .service-badge { background: #e7f1ff; color: var(--primary-color); padding: 5px 15px; border-radius: 50px; font-weight: 700; font-size: 0.8rem; display: inline-block; margin-bottom: 15px; }
+        
+        label { font-weight: 600; margin-bottom: 8px; display: block; color: #333; font-size: 0.95rem; }
+        .form-control, .form-select { border-radius: 8px; padding: 12px; border: 1px solid #dee2e6; margin-bottom: 20px; transition: 0.3s; }
+        .form-control:focus, .form-select:focus { border-color: var(--primary-color); box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15); }
+        
+        /* Phần dịch vụ con */
+        #sub-service-wrapper { 
+            background: #f8fbff; 
+            padding: 5px; 
+            border-radius: 12px; 
+            display: none; 
+            margin-bottom: 25px;
+            border: 1px dashed var(--primary-color);
+        }
+        
+        .price-display-box { 
+            background: white; 
+            padding: 10px 20px; 
+            border-radius: 8px; 
+            border: 1px solid #eee;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .price-value { color: #dc3545; font-weight: 800; font-size: 1.25rem; }
+
+.btn-primary {
+    padding: 8px 16px !important;
+    border-radius: 50px !important;
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+    color: #fff !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3 !important;
+    border-color: #0056b3 !important;
+    color: #fff !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3) !important;
+}
+@media (max-width: 991px) {
+    /* 1. Thu gọn chiều rộng Menu và ép cao hết màn hình */
+    .offcanvas.offcanvas-end {
+        width: 250px !important;
+        height: 100vh !important;
+        border-radius: 20px 0 0 20px !important;
+    }
+
+    /* 2. Căn giữa chữ MENU tuyệt đối */
+    .offcanvas-header {
+        display: flex !important;
+        justify-content: center !important; /* Căn giữa nội dung */
+        position: relative !important;      /* Làm gốc cho nút X */
+        padding: 15px !important;
+    }
+
+    .offcanvas-title {
+        margin: 0 !important;
+        width: 100% !important;
+        text-align: center !important;
+        font-size: 1.1rem !important;
+        font-weight: 800 !important;
+        letter-spacing: 1px;
+    }
+
+    /* 3. Đưa nút X vào góc mà không làm lệch chữ MENU */
+    .offcanvas-header .btn-close {
+        position: absolute !important;
+        right: 15px !important;
+        margin: 0 !important;
+    }
+
+    /* 4. Tối ưu danh sách Menu: Gọn, Khít, Căn giữa */
+    .offcanvas-body {
+        padding: 10px !important;
+    }
+
+    .offcanvas-body .navbar-nav {
+        flex-direction: column !important;
+        align-items: center !important; /* Căn giữa các mục menu */
+    }
+
+    .offcanvas-body .nav-link {
+        width: 100% !important;
+        text-align: center !important;
+        padding: 10px !important; /* Giảm padding để bớt dài */
+        font-size: 0.95rem !important;
+        border-bottom: 1px solid #f8f9fa; /* Đường kẻ mờ tinh tế */
+    }
+
+    /* 5. Nút Đặt lịch ngay gọn gàng */
+    .offcanvas-body .btn-primary {
+        margin-top: 15px !important;
+        width: 90% !important;
+        border-radius: 50px !important;
+        padding: 10px !important;
+        font-size: 0.9rem !important;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+            <div class="container d-flex align-items-center">
+                <a href="index.html" class="navbar-brand me-auto">
+                    <img src="images/logomoi.png" alt="Logo" style="height: 50px; width: auto;">
+                </a>
+
+                <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="offcanvas offcanvas-end custom-menu-popup" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header border-bottom">
+                        <h5 class="offcanvas-title fw-bold text-primary" id="offcanvasNavbarLabel">DANH MỤC</h5>
+                        <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav ms-auto align-items-center">
+                            <li class="nav-item">
+    <a href="index.html" class="nav-link text-secondary">Trang chủ</a> </li>
+                            <li class="nav-item">
+                            <a href="2_gioi-thieu & 3_thuong-hieu.html" class="nav-link text-secondary">Giới thiệu</a> </li>
+                            <li class="nav-item">
+                              <a href="4_dich-vu.html" class="nav-link text-secondary">Dịch vụ</a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="9_blog.html" class="nav-link text-secondary">Blog</a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="12_thu-vien.html" class="nav-link text-secondary">Thư viện</a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="14_doi-ngu.html" class="nav-link text-secondary">Đội ngũ</a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="13_bang-gia.html" class="nav-link text-secondary">Bảng giá</a>
+                            </li>
+                            
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-secondary" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user-circle me-1"></i> Hồ sơ
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                                    <li><a class="dropdown-item" href="login.html">Đăng nhập</a></li>
+                                    <li><a class="dropdown-item" href="register.html">Đăng ký</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item ms-lg-4 mt-3 mt-lg-0">
+                                <a href="15_dat-lich.html" class="btn btn-primary px-4 rounded-pill d-flex align-items-center justify-content-center shadow-sm fw-bold">
+                                <i class="far fa-calendar-check me-2"></i> Đặt lịch
+                              </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="booking-container">
+            <div class="text-center mb-5">
+                <div class="service-badge">NHANH CHÓNG - CHUYÊN NGHIỆP</div>
+                <h2 class="fw-bold">ĐẶT LỊCH PHỤC VỤ TẬN NƠI</h2>
+                <p class="text-muted">Minh bạch giá cả - Không phát sinh chi phí ngoài báo cáo</p>
+            </div>
+
+            <form id="bookingForm">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><i class="fas fa-user me-2 text-primary"></i>Họ và tên khách hàng</label>
+                        <input type="text" id="customerName" class="form-control" placeholder="..." required>
+                    </div>
+                    <div class="col-md-6">
+                        <label><i class="fas fa-phone me-2 text-primary"></i>Số điện thoại</label>
+                        <input type="tel" id="customerPhone" class="form-control" placeholder="..." required>
+                    </div>
+                </div>
+
+                <label><i class="fas fa-th-large me-2 text-primary"></i>Chọn nhóm dịch vụ</label>
+                <select id="group-select" class="form-select" required onchange="handleGroupChange()">
+                    <option value="">-- Vui lòng chọn nhóm dịch vụ --</option>
+                    <option value="group1">Điện - Nước - Kĩ thuật</option>
+                    <option value="group2">Vệ sinh dọn dẹp</option>
+                    <option value="group3">Hỗ trợ việc nhà</option>
+                    <option value="group4">Vận chuyển - Lắp đặt</option>
+                    <option value="group5">Sửa chữa nhà</option>
+                </select>
+
+                <div id="sub-service-wrapper">
+                    <label id="sub-label"><i class="fas fa-tools me-2 text-primary"></i>Chi tiết hạng mục cần làm</label>
+                    <select id="item-select" class="form-select" onchange="updatePriceDisplay()">
+                    </select>
+
+                    <div class="price-display-box">
+                        <span class="text-secondary small d-block">Đơn giá dự kiến:</span>
+                        <span id="price-output" class="price-value">0 VND</span>
+                    </div>
+                </div>
+
+                <label><i class="fas fa-map-marker-alt me-2 text-primary"></i>Địa chỉ thực hiện</label>
+                <input type="text" id="customerAddress" class="form-control" placeholder="Số nhà, đường, phường/xã..." required>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><i class="fas fa-calendar-check me-2 text-primary"></i>Ngày đặt</label>
+                        <input type="date" id="serviceDate" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label><i class="fas fa-clock me-2 text-primary"></i>Khung giờ (24h)</label>
+                        <select id="serviceTime" class="form-select" required>
+                            <option value="07:00">07:00</option>
+                            <option value="08:00">08:00</option>
+                            <option value="09:00">09:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="12:00">12:00</option>
+                            <option value="13:00">13:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                            <option value="18:00">18:00</option>
+                            <option value="19:00">19:00</option>
+                            <option value="20:00">20:00</option>
+                            <option value="21:00">21:00</option>
+                            <option value="22:00">22:00</option>
+                            <option value="23:00">23:00</option>
+                            <option value="hotline">12h - 7h sáng (Liên hệ hotline)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mt-3">
+    <div class="col-md-6">
+        <label><i class="fas fa-venus-mars me-2 text-primary"></i>Yêu cầu giới tính thợ</label>
+        <select id="workerGender" name="GioiTinhTho" class="form-select">
+            <option value="Không yêu cầu">Không yêu cầu</option>
+            <option value="Nam">Nam</option>
+            <option value="Nữ">Nữ</option>
+        </select>
+    </div>
+
+    <div class="col-md-6">
+        <label><i class="fas fa-user-clock me-2 text-primary"></i>Độ tuổi mong muốn</label>
+        <select id="workerAge" name="DoTuoiTho" class="form-select">
+            <option value="Không yêu cầu">Không yêu cầu</option>
+            <option value="20 - 30 tuổi">Từ 20 - 30 tuổi</option>
+            <option value="30 - 40 tuổi">Từ 30 - 40 tuổi</option>
+            <option value="40 - 50 tuổi">Từ 40 - 50 tuổi</option>
+            <option value="Trên 50 tuổi">Trên 50 tuổi</option>
+        </select>
+    </div>
+</div>
+
+                <label><i class="fas fa-comment-alt me-2 text-primary"></i>Ghi chú cho thợ</label>
+                <textarea id="customerNotes" class="form-control" rows="3" placeholder="Yêu cầu cụ thể (Ví dụ: Tháo lắp máy lạnh Inverter, dọn kho tầng 2...)"></textarea>
+
+                <div id="loginPrompt" class="alert alert-info mt-3" style="display: none;">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Đăng nhập để theo dõi đơn hàng!</strong>
+                    <a href="login.html" class="alert-link">Đăng nhập ngay</a> hoặc
+                    <a href="register.html" class="alert-link">Đăng ký tài khoản</a> để xem lịch sử đơn hàng và nhận ưu đãi.
+                </div>
+
+                <button type="submit" id="submitBtn" class="btn btn-primary w-100 fw-bold py-3 shadow-sm border-0 mt-2">
+                    <i class="fas fa-paper-plane me-2"></i>GỬI YÊU CẦU ĐẶT LỊCH
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/auth.js"></script>
+    <button id="backToTop" aria-label="Lên đầu trang">↑</button>
+
+    <script>
+        const priceData = {
+            "group1": [
+                {name: "Sửa điện (Ổ cắm, công tắc, dây...)", price: "Từ 250.000 VND"},
+                {name: "Lắp đặt hệ thống điện (Đi dây mới...)", price: "Khảo sát báo giá"},
+                {name: "Sửa máy lạnh (Không lạnh, chảy nước...)", price: "Từ 350.000 VND"},
+                {name: "Vệ sinh máy lạnh (Dàn nóng/lạnh)", price: "200.000 - 450.000 VND"},
+                {name: "Sửa tủ lạnh (Không đông đá...)", price: "Từ 300.000 VND"},
+                {name: "Sửa máy giặt (Báo lỗi, không vắt...)", price: "Từ 250.000 VND"},
+                {name: "Sửa máy nước nóng", price: "Từ 200.000 VND"},
+                {name: "Sửa quạt điện (Thay motor...)", price: "Từ 100.000 VND"},
+                {name: "Lắp đặt thiết bị điện (Đèn, TV...)", price: "Từ 150.000 VND"},
+                {name: "Sửa chữa rò rỉ nước", price: "Từ 200.000 VND"},
+                {name: "Thông tắc vệ sinh", price: "Từ 400.000 VND"},
+                {name: "Sửa chữa thiết bị nước", price: "Từ 200.000 VND"},
+                {name: "Xử lý rò rỉ ngầm", price: "Từ 1.500.000 VND"},
+                {name: "Bảo trì PC & Laptop", price: "Từ 300.000 VND"},
+                {name: "Sửa chữa Di động", price: "Từ 200.000 VND"},
+                {name: "Khôi phục dữ liệu & Bảo mật", price: "Từ 500.000 VND"}
+            ],
+            "group2": [
+                {name: "Dọn nhà theo giờ", price: "Từ 80.000 VND/h"},
+                {name: "Tổng vệ sinh nhà (Mới xây/đang ở)", price: "Từ 15.000 VND/m²"},
+                {name: "Giặt sofa, nệm, thảm", price: "Từ 300.000 VND"},
+                {name: "Lau kính, cửa", price: "Từ 12.000 VND/m²"},
+                {name: "Vệ sinh nhà bếp (Tẩy dầu mỡ)", price: "Từ 350.000 VND"},
+                {name: "Vệ sinh nhà vệ sinh (Khử mùi)", price: "Từ 250.000 VND"},
+                {name: "Vệ sinh máy lạnh", price: "Từ 200.000 VND"},
+                {name: "Vệ sinh thiết bị điện (Quạt, tủ lạnh...)", price: "Từ 50.000 VND"}
+            ],
+            "group3": [
+                {name: "Giúp việc theo giờ", price: "Từ 80.000 VND/h"},
+                {name: "Trông trẻ", price: "Từ 100.000 VND/h"},
+                {name: "Chăm sóc người già", price: "Từ 120.000 VND/h"},
+                {name: "Làm vườn & Chăm cây", price: "Từ 200.000 VND/lần"},
+                {name: "Lắp ráp nội thất (IKEA...)", price: "Từ 150.000 VND/món"},
+                {name: "Sắp xếp dọn kho", price: "Từ 400.000 VND"},
+                {name: "Đưa đón trẻ tận nơi", price: "Từ 100.000 VND/lần"},
+                {name: "Ủi đồ & Gấp xếp", price: "Từ 100.000 VND/h"}
+            ],
+            "group4": [
+                {name: "Bốc vác hàng hóa (Kho, xe tải)", price: "Từ 200.000 VND/xe"},
+                {name: "Chuyển phòng trọ (Trọn gói)", price: "Từ 350.000 VND/chuyến"},
+                {name: "Chuyển nhà nhỏ (Tháo lắp đồ)", price: "Khảo sát báo giá"},
+                {name: "Chuyển đồ nội thất (Tủ, giường...)", price: "Từ 150.000 VND/món"},
+                {name: "Chở hàng bằng xe máy", price: "Từ 50.000 VND"},
+                {name: "Chở hàng bằng xe tải nhỏ", price: "Từ 250.000 VND/chuyến"},
+                {name: "Hỗ trợ lên/xuống cầu thang", price: "Từ 50.000 VND/lầu"},
+                {name: "Dọn dẹp sau vận chuyển", price: "Từ 100.000 VND"},
+                {name: "Lắp đặt TV & Thiết bị điện tử", price: "Từ 200.000 VND"},
+                {name: "Lắp đặt máy giặt & Máy lọc nước", price: "Từ 150.000 VND"},
+                {name: "Lắp đặt Camera an ninh", price: "Từ 300.000 VND"}
+            ],
+            "group5": [
+                {name: "Sơn & Xử lý tường mốc", price: "Từ 90.000 VND/m²"},
+                {name: "Chống thấm chuyên sâu", price: "Từ 200.000 VND/m²"},
+                {name: "Ốp lát gạch, đá trang trí", price: "Từ 250.000 VND/m²"},
+                {name: "Lắp đặt trần thạch cao", price: "Từ 280.000 VND/m²"},
+                {name: "Sửa chữa & Gia cố cửa sắt/nhôm", price: "Từ 300.000 VND"},
+                {name: "Phá dỡ & Xây tường ngăn", price: "Từ 1.200.000 VND/m²"},
+                {name: "Sửa chữa nội thất gỗ", price: "Từ 450.000 VND/món"},
+                {name: "Thi công sàn gỗ, sàn nhựa", price: "Từ 120.000 VND/m²"},
+                {name: "Sửa mái tôn & Máng xối", price: "Từ 350.000 VND/m"},
+                {name: "Cải tạo không gian theo yêu cầu", price: "Khảo sát & Báo giá"}
+            ]
+        };
+
+        let selectedServiceName = '';
+
+        function handleGroupChange() {
+            const groupKey = document.getElementById('group-select').value;
+            const wrapper = document.getElementById('sub-service-wrapper');
+            const itemSelect = document.getElementById('item-select');
+
+            if (groupKey) {
+                wrapper.style.display = 'block';
+                itemSelect.innerHTML = '<option value="">-- Chọn hạng mục cụ thể --</option>';
+
+                priceData[groupKey].forEach(item => {
+                    let opt = document.createElement('option');
+                    opt.value = item.price;
+                    opt.text = item.name;
+                    itemSelect.appendChild(opt);
+                });
+            } else {
+                wrapper.style.display = 'none';
+            }
+            document.getElementById('price-output').innerText = "0 VND";
+            selectedServiceName = '';
+        }
+
+        function updatePriceDisplay() {
+            const selectedOption = document.getElementById('item-select').options[document.getElementById('item-select').selectedIndex];
+            const price = document.getElementById('item-select').value;
+            document.getElementById('price-output').innerText = price ? price : "0 VND";
+            selectedServiceName = selectedOption ? selectedOption.text : '';
+        }
+
+        // Initialize form with user data if logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = authManager.getCurrentUser();
+
+            if (currentUser) {
+                // Auto-fill user information
+                document.getElementById('customerName').value = currentUser.fullName;
+                document.getElementById('customerPhone').value = currentUser.phone;
+
+                // Hide login prompt
+                document.getElementById('loginPrompt').style.display = 'none';
+            } else {
+                // Show login prompt for non-logged in users
+                document.getElementById('loginPrompt').style.display = 'block';
+            }
+
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('serviceDate').setAttribute('min', today);
+        });
+
+        // Handle form submission
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
+
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>ĐANG XỬ LÝ...';
+
+            // Collect form data
+            const formData = {
+                name: document.getElementById('customerName').value.trim(),
+                phone: document.getElementById('customerPhone').value.trim(),
+                service: selectedServiceName || 'Dịch vụ chưa chọn',
+                address: document.getElementById('customerAddress').value.trim(),
+                date: document.getElementById('serviceDate').value,
+                time: document.getElementById('serviceTime').value,
+                price: document.getElementById('price-output').textContent,
+                notes: document.getElementById('customerNotes').value.trim()
+            };
+
+            // Validate required fields
+            if (!formData.name || !formData.phone || !formData.address || !formData.date || !formData.time) {
+                alert('Vui lòng điền đầy đủ thông tin bắt buộc!');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+                return;
+            }
+
+            // Check if user is logged in
+            const currentUser = authManager.getCurrentUser();
+
+            if (currentUser) {
+                // Save order to user's account
+                const orderResult = authManager.addOrder(formData);
+
+                if (orderResult) {
+                    // Show success message and redirect
+                    alert('Đặt lịch thành công! Bạn có thể xem đơn hàng trong lịch sử.');
+                    window.location.href = 'order-history.html';
+                } else {
+                    alert('Có lỗi xảy ra khi lưu đơn hàng. Vui lòng thử lại!');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                }
+            } else {
+                // For non-logged in users, still allow booking but show login prompt
+                setTimeout(() => {
+                    alert('Đặt lịch thành công! Đăng nhập để theo dõi đơn hàng và nhận ưu đãi.');
+                    window.location.href = '16_cam-on.html';
+                }, 1000);
+            }
+        });
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,378 @@
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bí kíp sắp xếp nhà cửa gọn gàng | Thợ Ơi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/shared-styles.css" rel="stylesheet">
+    
+    <style>
+        :root { --primary-color: #0d6efd; --dark-bg: #1a1d20; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f8f9fa; padding-top: 70px; color: #333; }
+        * { -webkit-tap-highlight-color: transparent !important; }
+
+        /* --- NAVBAR --- */
+        header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
+        .navbar { padding: 5px 0 !important; }
+      .navbar-brand img { 
+    height: 110px !important; /* Tăng số này lên nếu muốn to hơn nữa */
+    width: auto; 
+    margin: -10px 0 !important; /* Mẹo để to ra mà không làm cao thanh menu */
+}        
+        .navbar-nav .nav-link {
+            color: #666 !important; font-weight: 500; padding: 8px 15px !important;
+            transition: 0.3s; position: relative;
+        }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: var(--primary-color) !important; font-weight: 700; }
+        
+        @media (min-width: 992px) {
+            .navbar-nav .nav-link::after {
+                content: ''; position: absolute; bottom: 0; left: 15px;
+                width: 0; height: 2px; background-color: var(--primary-color); transition: 0.3s;
+            }
+            .navbar-nav .nav-link:hover::after, .navbar-nav .nav-link.active::after { width: calc(100% - 30px); }
+        }
+
+        /* Mobile Menu */
+        @media (max-width: 991px) {
+            .custom-menu-popup { border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+            .nav-item { border-bottom: 1px solid #eee; width: 100%; text-align: center; }
+        }
+
+.navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color:
+     var(--primary-color) !important; font-weight: 700;
+ }
+       @media (max-width: 991px) {
+            .custom-menu-popup { border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+            .nav-item { border-bottom: 1px solid #eee; width: 100%; text-align: center; }
+        }
+        .post-container { background: white; border-radius: 20px; padding: 40px; margin-top: 30px; margin-bottom: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .breadcrumb { font-size: 0.9rem; margin-bottom: 20px; }
+        .breadcrumb a { text-decoration: none; color: var(--primary-color); }
+        
+        h1 { font-weight: 800; color: #111; font-size: 2.2rem; line-height: 1.3; margin-bottom: 15px; }
+        .post-meta-detail { font-size: 0.85rem; color: #888; border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 30px; }
+        
+        .post-content-full h2 { font-weight: 700; color: #222; margin-top: 35px; margin-bottom: 15px; font-size: 1.5rem; }
+        .post-content-full p { line-height: 1.8; margin-bottom: 20px; color: #444; }
+        .post-content-full ul { margin-bottom: 25px; padding-left: 20px; }
+        .post-content-full li { margin-bottom: 12px; line-height: 1.6; }
+        
+        .post-image { width: 100%; border-radius: 15px; margin: 20px 0 35px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .post-intro { font-size: 1.1rem; font-weight: 500; color: #555; border-left: 4px solid var(--primary-color); padding-left: 20px; }
+        .post-outro { background: #f1f7ff; padding: 25px; border-radius: 12px; font-weight: 500; margin-top: 40px; border-left: 4px solid var(--primary-color); }
+
+        #backToTop {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            width: 46px;
+            height: 46px;
+            border: none;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: #fff;
+            font-size: 24px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            z-index: 999;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        #backToTop:hover { transform: translateY(-2px); opacity: 0.95; }
+        
+  header {
+    position: fixed; 
+    top: 0;        
+    left: 0;
+    width: 100%;    
+    z-index: 1000;  
+}
+
+
+
+   body {
+    padding-top: 70px; 
+}
+
+.btn-primary {
+    padding: 8px 16px !important;
+    border-radius: 50px !important;
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+    color: #fff !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3 !important;
+    border-color: #0056b3 !important;
+    color: #fff !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3) !important;
+}
+@media (max-width: 991px) {
+    /* 1. Thu gọn chiều rộng Menu và ép cao hết màn hình */
+    .offcanvas.offcanvas-end {
+        width: 250px !important;
+        height: 100vh !important;
+        border-radius: 20px 0 0 20px !important;
+    }
+
+    /* 2. Căn giữa chữ MENU tuyệt đối */
+    .offcanvas-header {
+        display: flex !important;
+        justify-content: center !important; /* Căn giữa nội dung */
+        position: relative !important;      /* Làm gốc cho nút X */
+        padding: 15px !important;
+    }
+
+    .offcanvas-title {
+        margin: 0 !important;
+        width: 100% !important;
+        text-align: center !important;
+        font-size: 1.1rem !important;
+        font-weight: 800 !important;
+        letter-spacing: 1px;
+    }
+
+    /* 3. Đưa nút X vào góc mà không làm lệch chữ MENU */
+    .offcanvas-header .btn-close {
+        position: absolute !important;
+        right: 15px !important;
+        margin: 0 !important;
+    }
+
+    /* 4. Tối ưu danh sách Menu: Gọn, Khít, Căn giữa */
+    .offcanvas-body {
+        padding: 10px !important;
+    }
+
+    .offcanvas-body .navbar-nav {
+        flex-direction: column !important;
+        align-items: center !important; /* Căn giữa các mục menu */
+    }
+
+    .offcanvas-body .nav-link {
+        width: 100% !important;
+        text-align: center !important;
+        padding: 10px !important; /* Giảm padding để bớt dài */
+        font-size: 0.95rem !important;
+        border-bottom: 1px solid #f8f9fa; /* Đường kẻ mờ tinh tế */
+    }
+
+    /* 5. Nút Đặt lịch ngay gọn gàng */
+    .offcanvas-body .btn-primary {
+        margin-top: 15px !important;
+        width: 90% !important;
+        border-radius: 50px !important;
+        padding: 10px !important;
+        font-size: 0.9rem !important;
+    }
+}
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+    <div class="container d-flex align-items-center">
+      <a href="index.html" class="navbar-brand me-auto">
+        <img loading="lazy" src="images/logomoi.png" alt="Logo" style="height: 50px; width: auto;">
+      </a>
+
+     <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+      <div class="offcanvas offcanvas-end custom-menu-popup" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header border-bottom">
+          <h5 class="offcanvas-title fw-bold text-primary" id="offcanvasNavbarLabel">DANH MỤC</h5>
+          <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        
+        <div class="offcanvas-body">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item">
+              <a href="index.html" class="nav-link link text-secondary">Trang chủ</a> </li>
+            <li class="nav-item">
+              <a href="2_gioi-thieu & 3_thuong-hieu.html" class="nav-link text-secondary">Giới thiệu</a>
+            </li>
+            <li class="nav-item">
+              <a href="4_dich-vu.html" class="nav-link text-secondary">Dịch vụ</a>
+            </li>
+            <li class="nav-item">
+              <a href="9_blog.html" class="nav-link active fw-bold text-primary">Blog</a> </li>
+            </li>
+            <li class="nav-item">
+              <a href="12_thu-vien.html" class="nav-link text-secondary">Thư viện</a>
+            </li>
+            <li class="nav-item">
+              <a href="14_doi-ngu.html" class="nav-link text-secondary">Đội ngũ</a>
+            </li>
+            <li class="nav-item">
+              <a href="13_bang-gia.html" class="nav-link text-secondary">Bảng giá</a>
+            </li>
+            
+                                        <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-secondary" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user-circle me-1"></i> Hồ sơ
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                                    <li><a class="dropdown-item" href="login.html">Đăng nhập</a></li>
+                                    <li><a class="dropdown-item" href="register.html">Đăng ký</a></li>
+                                </ul>
+                            </li>
+                        <!-- User Menu -->
+            <li class="nav-item dropdown" id="userMenu" style="display: none;">
+                <a class="nav-link dropdown-toggle text-secondary" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-circle me-1"></i>
+                    <span id="userName"></span>
+                </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <!-- Customer items -->
+                            <li class="customer-only"><a class="dropdown-item" href="order-history.html"><i class="fas fa-shopping-cart me-2"></i>Quản lý tài khoản</a></li>
+                            <li class="customer-only"><a class="dropdown-item" href="profile.html"><i class="fas fa-map-marker-alt me-2"></i>Lịch sử đặt lịch</a></li>
+                            <li class="customer-only"><a class="dropdown-item" href="profile.html"><i class="fas fa-wallet me-2"></i>Liên hệ & Hỗ trợ</a></li>
+                            <!-- Worker items -->
+                            <li class="worker-only"><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Quản lý tài khoản</a></li>
+                            <li class="worker-only"><a class="dropdown-item" href="worker-dashboard.html"><i class="fas fa-tasks me-2"></i>Quản lý công việc</a></li>
+                            <li class="worker-only"><a class="dropdown-item" href="worker-dashboard.html"><i class="fas fa-wallet me-2"></i>Thu nhập & Ví</a></li>
+                            <!-- Common -->
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="authManager.logout()"><i class="fas fa-sign-out-alt me-2"></i>Đăng xuất</a></li>
+                        </ul>            </li>
+            
+            <li class="nav-item ms-lg-4 mt-3 mt-lg-0">
+                <a href="15_dat-lich.html" class="btn btn-primary px-4 rounded-pill d-flex align-items-center justify-content-center shadow-sm fw-bold">
+                <i class="far fa-calendar-check me-2"></i> Đặt lịch
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+    <main class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9 post-container">
+                <nav class="breadcrumb"><a href="index.html">Trang chủ</a> / <a href="9_blog.html">Blog</a> / Điện lạnh & Máy lạnh</nav>
+                
+                <h1>Bí kíp sắp xếp nhà cửa gọn gàng, tối ưu diện tích cho căn hộ nhỏ</h1>
+                <div class="post-meta-detail">
+                    <i class="far fa-folder-open me-1"></i> Chuyên mục: Mẹo vặt | 
+                    <i class="far fa-calendar-alt ms-3 me-1"></i> Ngày đăng: 22/03/2026 | 
+                    <i class="far fa-user ms-3 me-1"></i> Chuyên gia Thợ Ơi
+                </div>
+
+                <div class="post-content-full">
+                    <p class="post-intro">Một ngôi nhà bừa bộn không chỉ gây stress mà còn làm mất đi sự thoải mái vốn có. Với những không gian khiêm tốn, việc sắp xếp khoa học chính là nghệ thuật "mở rộng" diện tích mà không cần xây sửa.</p>
+
+                    <h2>1. Nguyên tắc "Thanh lọc" đồ đạc (Decluttering)</h2>
+                    <p>Hãy dũng cảm loại bỏ những thứ bạn không dùng tới trong 1 năm qua. Việc giữ lại quá nhiều đồ đạc "dự phòng" là nguyên nhân chính gây nên sự chật chội.</p>
+                    <ul>
+                        <li><strong>Quy tắc 1 vào - 1 ra:</strong> Mỗi khi mua thêm một vật dụng mới, hãy tiễn một món đồ cũ ra khỏi nhà.</li>
+                        <li><strong>Phân loại thông minh:</strong> Nhóm các đồ vật có cùng công năng lại một chỗ để dễ quản lý.</li>
+                    </ul>
+
+            <img loading="lazy" src="images/11_.jpg" alt="Sắp xếp nhà cửa thông minh." class="post-image">
+
+                    <h2>2. Tận dụng không gian theo chiều dọc</h2>
+                    <p>Đừng chỉ tập trung vào mặt sàn. Các bức tường chính là nơi lưu trữ tiềm năng mà nhiều người thường bỏ quên.</p>
+                    <ul>
+                        <li>Sử dụng các loại kệ treo kịch trần để tối ưu hóa khoảng trống phía trên.</li>
+                        <li>Lắp đặt móc treo đa năng sau cửa cho túi xách, khăn hoặc chìa khóa.</li>
+                    </ul>
+
+                    <h2>3. Sử dụng hộp lưu trữ có dán nhãn</h2>
+                    <p>Thay vì để đồ đạc tràn lan trên bàn, hãy cho chúng vào các hộp nhựa hoặc giỏ mây. Việc dán nhãn giúp bạn tìm đồ trong nháy mắt mà không cần lục tung mọi thứ.</p>
+
+                    <p class="post-outro">
+                        Sắp xếp nhà cửa là cách bạn tái tạo năng lượng cho bản thân. Nếu công việc quá bận rộn, hãy để 
+                        <strong>Dịch vụ Giúp việc & Sắp xếp chuyên nghiệp của Thợ Ơi</strong> đồng hành cùng bạn. 
+                        Tận hưởng không gian sống chuẩn 5 sao ngay hôm nay!
+                    </p>
+
+                    <section class="post-cta mt-4 p-4 text-center rounded-3" style="background: linear-gradient(135deg, rgba(13,110,253,0.12), rgba(13,110,253,0.03)); border: 1px solid rgba(13,110,253,0.25);">
+                        <h3 class="fw-bold mb-3">Chỉ còn một bước nữa để ngôi nhà trở nên gọn gàng!</h3>
+                        <p class="mb-3">Đặt lịch ngay cùng Thợ Ơi, kỹ thuật viên đến tận nhà trong ngày.</p>
+                        <a href="15_dat-lich.html" class="btn btn-primary btn-lg rounded-pill px-5">ĐẶT LỊCH NGAY</a>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+ <footer style="background: linear-gradient(135deg, #1a1d20, #2c3034); color: #fff; padding: 15px 0 10px; font-family: 'Segoe UI', sans-serif; font-size: 0.7rem; position: relative;">
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('images/footer-bg.png') center/cover no-repeat; opacity: 0.1;"></div>
+    <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 15px; position: relative; z-index: 1;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">
+            
+            <div style="flex: 1; min-width: 200px;">
+                <h3 style="color: #fff; font-weight: 800; margin: 0 0 5px 0; font-size: 1rem;">Thợ Ơi</h3>
+                <p style="color: #fff; margin-bottom: 8px; line-height: 1.4;">Hệ sinh thái dịch vụ tận nơi chuyên nghiệp & uy tín hàng đầu</p>
+                <div style="display: flex; gap: 15px;">
+                    <a href="#" style="color: #0d6efd; text-decoration: none; font-size: 0.9rem;"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color: #0d6efd; text-decoration: none; font-size: 0.9rem;"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div style="flex: 1; min-width: 180px;">
+                <h4 style="font-size: 0.75rem; text-transform: uppercase; margin-bottom: 8px; font-weight: 700;">LIÊN HỆ</h4>
+                <div style="color: #fff; line-height: 1.6;">
+                    <p style="margin: 0;"><i class="fas fa-link" style="width: 18px; color: #0d6efd;"></i> Website: https://thooi.vn</p>
+                    <p style="margin: 0;"><i class="fas fa-phone-alt" style="width: 18px; color: #0d6efd;"></i> Hotline: 0346 171 146</p>
+                    <p style="margin: 0;"><i class="fas fa-comment-dots" style="width: 18px; color: #0d6efd;"></i> Zalo: 0346 171 146</p>
+                    <p style="margin: 0;"><i class="fas fa-map-marker-alt" style="width: 18px; color: #0d6efd;"></i> Địa chỉ: 107 Ngự Bình, Phường An Cựu, Thành phố Huế</p>
+                </div>
+            </div>
+<div style="flex: 1; min-width: 220px; text-align: center;"> 
+                <h4 style="font-size: 0.75rem; text-transform: uppercase; margin: 0 0 4px 0; font-weight: 700; color: #fff;">TẢI ỨNG DỤNG</h4>    
+                
+                <div style="display: flex; align-items: center; justify-content: center; gap: 12px;"> 
+                    <img loading="lazy" src="images/logomoi.png" alt="Logo App" style="height: 100px; width: auto; object-fit: contain;">
+                    
+                    <div style="text-align: left;"> 
+                        <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="GP" style="height: 22px; display: block; margin-bottom: 6px;">
+                        <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="AS" style="height: 22px; display: block;">
+                    </div>
+
+                    <div style="background: #fff; padding: 4px; border-radius: 6px; line-height: 0;">
+                        <img loading="lazy" src="https://api.qrserver.com/v1/create-qr-code/?size=60x60&data=thooi" alt="QR" style="width: 50px; height: 50px;">
+                    </div>
+                </div>
+            </div>
+        </div> <div style="text-align: center; padding-top: 5px; font-size: 0.65rem; color: #fff; opacity: 0.8;">
+            <p style="margin: 0;">&copy; 2026 Thợ Ơi. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+    <button id="backToTop" aria-label="Lên đầu trang">↑</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    
+<script>
+    // Script cho nút Back to Top
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 250) {
+            backToTop.style.display = 'flex';
+        } else {
+            backToTop.style.display = 'none';
+        }
+    });
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
+</body>
+</html>

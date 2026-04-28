@@ -1,0 +1,508 @@
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vệ sinh dọn dẹp | Thợ Ơi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/shared-styles.css" rel="stylesheet">
+    
+    <style>
+        :root { --primary-color: #0d6efd; --dark-bg: #1a1d20; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f8f9fa; padding-top: 70px; }
+        * { -webkit-tap-highlight-color: transparent !important; }
+
+        /* --- NAVBAR --- */
+        header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
+        .navbar { padding: 5px 0 !important; }
+      .navbar-brand img { 
+    height: 110px !important; /* Tăng số này lên nếu muốn to hơn nữa */
+    width: auto; 
+    margin: -10px 0 !important; /* Mẹo để to ra mà không làm cao thanh menu */
+}        
+        .navbar-nav .nav-link {
+            color: #666 !important; font-weight: 500; padding: 8px 15px !important;
+            transition: 0.3s; position: relative;
+        }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: var(--primary-color) !important; font-weight: 700; }
+        
+        @media (min-width: 992px) {
+            .navbar-nav .nav-link::after {
+                content: ''; position: absolute; bottom: 0; left: 15px;
+                width: 0; height: 2px; background-color: var(--primary-color); transition: 0.3s;
+            }
+            .navbar-nav .nav-link:hover::after, .navbar-nav .nav-link.active::after { width: calc(100% - 30px); }
+        }
+
+        /* Mobile Menu */
+        @media (max-width: 991px) {
+            .custom-menu-popup { border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+            .nav-item { border-bottom: 1px solid #eee; width: 100%; text-align: center; }
+        }
+
+        .navbar { padding: 0 !important; min-height: 60px; }
+        .navbar-nav .nav-link {
+            color: #666 !important; font-weight: 500; padding: 15px 15px !important;
+            transition: 0.3s; position: relative;
+            text-decoration: none !important;
+        }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: var(--primary-color) !important; font-weight: 700; }
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 15px;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover::after, .navbar-nav .nav-link.active::after {
+            width: calc(100% - 30px);
+        }
+
+        /* Thu nhỏ khoảng trống banner đầu trang */
+        .service-header {
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.9), rgba(26, 29, 32, 0.8)), url('images/sua-dien-bg.jpg');
+            background-size: cover; background-position: center; 
+            padding: 60px 0 100px 0; color: white; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .service-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+        .service-header h1, .service-header p {
+            position: relative; z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- PRICE TABLE --- */
+        .price-section { margin-top: 30px; position: relative; z-index: 10; text-align: center; }
+
+        .price-heading {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.6rem;
+            background: #ffffff;
+            box-shadow: 0 15px 40px rgba(13, 110, 253, 0.12);
+            border-radius: 50px;
+            border: 1px solid rgba(13, 110, 253, 0.12);
+            color: #0d6efd;
+            margin: 0 auto 1.6rem;
+            position: relative;
+            top: 10px;
+            max-width: fit-content;
+        }
+        .price-heading h2 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            .price-section { margin-top: 20px; }
+            .price-heading { width: 100%; top: 0; padding: 0.85rem 1rem; }
+            .price-heading h2 { font-size: 1.05rem; }
+        }
+        
+        .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; margin-top: 20px; }
+        
+        .service-card {
+            background: white; border-radius: 15px; padding: 20px; text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1); transition: all 0.3s ease;
+            border: 1px solid #eee; position: relative; overflow: hidden;
+            animation: fadeInUp 0.6s ease-out forwards; opacity: 0; transform: translateY(20px);
+        }
+        .service-card:nth-child(1) { animation-delay: 0.1s; }
+        .service-card:nth-child(2) { animation-delay: 0.2s; }
+        .service-card:nth-child(3) { animation-delay: 0.3s; }
+        .service-card:nth-child(4) { animation-delay: 0.4s; }
+        .service-card:nth-child(5) { animation-delay: 0.5s; }
+        .service-card:nth-child(6) { animation-delay: 0.6s; }
+        .service-card:nth-child(7) { animation-delay: 0.7s; }
+        .service-card:nth-child(8) { animation-delay: 0.8s; }
+
+        .service-card:hover {
+            transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .service-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), #ff6b6b);
+        }
+        .service-icon {
+            width: 50px; height: 50px; background: linear-gradient(45deg, var(--primary-color), #0056b3);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 12px; color: white; font-size: 1.3rem; box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+        }
+        .service-title { font-weight: bold; margin-bottom: 8px; color: #333; font-size: 1rem; }
+        .service-price { font-size: 1.1rem; color: var(--primary-color); font-weight: 700; margin-bottom: 12px; }
+        .service-btn { 
+            background: linear-gradient(45deg, var(--primary-color), #0056b3); color: white; border: none;
+            padding: 8px 20px; border-radius: 25px; font-weight: bold; text-decoration: none;
+            transition: all 0.3s ease; display: inline-block;
+        }
+        .service-btn:hover { 
+            background: linear-gradient(45deg, #0056b3, var(--primary-color)); transform: scale(1.05); color: white;
+        }
+
+        .commit-card { background: white; border-radius: 15px; padding: 30px; transition: 0.3s; height: 100%; border-bottom: 4px solid transparent; }
+        .commit-card:hover { transform: translateY(-10px); border-bottom: 4px solid var(--primary-color); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .commit-card i { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 20px; }
+
+        /* Footer Style */
+        .main-footer { background: var(--dark-bg); color: #dee2e6; padding: 40px 0 20px; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 30px; margin-bottom: 30px; }
+        .footer-brand-name { font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 15px; }
+        .contact-info-list { list-style: none; padding: 0; font-size: 0.9rem; }
+        .contact-info-list li { margin-bottom: 8px; color: #adb5bd; }
+        .contact-info-list i { width: 20px; color: var(--primary-color); }
+        .app-stores img { height: 35px; margin-bottom: 10px; display: block; border-radius: 5px; }
+        .app-download-area { display: flex; gap: 20px; align-items: flex-start; }
+        .qr-wrapper img { background: white; padding: 5px; border-radius: 5px; }
+        .footer-bottom-bar { border-top: 1px solid #343a40; padding-top: 20px; display: flex; justify-content: space-between; font-size: 0.8rem; color: #6c757d; }
+
+        @media (max-width: 991px) {
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-bottom-bar { flex-direction: column; gap: 15px; text-align: center; }
+        }
+
+        #backToTop {
+            position: fixed; right: 22px; bottom: 22px; width: 46px; height: 46px; border: none;
+            border-radius: 50%; background: var(--primary-color); color: #fff; font-size: 24px;
+            display: none; align-items: center; justify-content: center; cursor: pointer;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); z-index: 999;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-primary {
+            background-color: var(--primary-color) !important;
+            color: white !important; border: none !important;
+            padding: 8px 16px !important; border-radius: 50px !important;
+            font-weight: bold; transition: 0.2s !important;
+        }
+        .btn-primary:active {
+            transform: scale(0.94) !important;
+            background-color: #0b5ed7 !important;
+            opacity: 1 !important;
+        }
+        @media (max-width: 991px) {
+    /* 1. Thu gọn chiều rộng Menu và ép cao hết màn hình */
+    .offcanvas.offcanvas-end {
+        width: 250px !important;
+        height: 100vh !important;
+        border-radius: 20px 0 0 20px !important;
+    }
+
+    /* 2. Căn giữa chữ MENU tuyệt đối */
+    .offcanvas-header {
+        display: flex !important;
+        justify-content: center !important; /* Căn giữa nội dung */
+        position: relative !important;      /* Làm gốc cho nút X */
+        padding: 15px !important;
+    }
+
+    .offcanvas-title {
+        margin: 0 !important;
+        width: 100% !important;
+        text-align: center !important;
+        font-size: 1.1rem !important;
+        font-weight: 800 !important;
+        letter-spacing: 1px;
+    }
+
+    /* 3. Đưa nút X vào góc mà không làm lệch chữ MENU */
+    .offcanvas-header .btn-close {
+        position: absolute !important;
+        right: 15px !important;
+        margin: 0 !important;
+    }
+
+    /* 4. Tối ưu danh sách Menu: Gọn, Khít, Căn giữa */
+    .offcanvas-body {
+        padding: 10px !important;
+    }
+
+    .offcanvas-body .navbar-nav {
+        flex-direction: column !important;
+        align-items: center !important; /* Căn giữa các mục menu */
+    }
+
+    .offcanvas-body .nav-link {
+        width: 100% !important;
+        text-align: center !important;
+        padding: 10px !important; /* Giảm padding để bớt dài */
+        font-size: 0.95rem !important;
+        border-bottom: 1px solid #f8f9fa; /* Đường kẻ mờ tinh tế */
+    }
+
+    /* 5. Nút Đặt lịch ngay gọn gàng */
+    .offcanvas-body .btn-primary {
+        margin-top: 15px !important;
+        width: 90% !important;
+        border-radius: 50px !important;
+        padding: 10px !important;
+        font-size: 0.9rem !important;
+    }
+}
+    </style>
+</head>
+<body>
+
+ <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+            <div class="container d-flex align-items-center">
+                <a href="index.html" class="navbar-brand me-auto">
+                    <img src="images/logomoi.png" alt="Logo" style="height: 50px; width: auto;">
+                </a>
+
+                <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="offcanvas offcanvas-end custom-menu-popup" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header border-bottom">
+                        <h5 class="offcanvas-title fw-bold text-primary" id="offcanvasNavbarLabel">DANH MỤC</h5>
+                        <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav ms-auto align-items-center">
+                            <li class="nav-item">
+    <a href="index.html" class="nav-link text-secondary">Trang chủ</a> </li>
+                            <li class="nav-item">
+                            <a href="2_gioi-thieu & 3_thuong-hieu.html" class="nav-link text-secondary">Giới thiệu</a> </li>
+                            <li class="nav-item">
+                              <a href="4_dich-vu.html" class="nav-link active fw-bold text-primary">Dịch vụ</a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="9_blog.html" class="nav-link text-secondary">Blog</a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="12_thu-vien.html" class="nav-link text-secondary">Thư viện</a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="14_doi-ngu.html" class="nav-link text-secondary">Đội ngũ</a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="13_bang-gia.html" class="nav-link text-secondary">Bảng giá</a>
+                            </li>
+                            
+                                                        <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-secondary" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user-circle me-1"></i> Hồ sơ
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                                    <li><a class="dropdown-item" href="login.html">Đăng nhập</a></li>
+                                    <li><a class="dropdown-item" href="register.html">Đăng ký</a></li>
+                                </ul>
+                            </li>
+                        <!-- User Menu -->
+                            <li class="nav-item dropdown" id="userMenu" style="display: none;">
+                                <a class="nav-link dropdown-toggle text-secondary" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user-circle me-1"></i>
+                                    <span id="userName"></span>
+                                </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <!-- Customer items -->
+                            <li class="customer-only"><a class="dropdown-item" href="order-history.html"><i class="fas fa-shopping-cart me-2"></i>Quản lý tài khoản</a></li>
+                            <li class="customer-only"><a class="dropdown-item" href="profile.html"><i class="fas fa-map-marker-alt me-2"></i>Lịch sử đặt lịch</a></li>
+                            <li class="customer-only"><a class="dropdown-item" href="profile.html"><i class="fas fa-wallet me-2"></i>Liên hệ & Hỗ trợ</a></li>
+                            <!-- Worker items -->
+                            <li class="worker-only"><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Quản lý tài khoản</a></li>
+                            <li class="worker-only"><a class="dropdown-item" href="worker-dashboard.html"><i class="fas fa-tasks me-2"></i>Quản lý công việc</a></li>
+                            <li class="worker-only"><a class="dropdown-item" href="worker-dashboard.html"><i class="fas fa-wallet me-2"></i>Thu nhập & Ví</a></li>
+                            <!-- Common -->
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="authManager.logout()"><i class="fas fa-sign-out-alt me-2"></i>Đăng xuất</a></li>
+                        </ul>                            </li>
+                            <li class="nav-item ms-lg-4 mt-3 mt-lg-0">
+                                <a href="15_dat-lich.html" class="btn btn-primary px-4 rounded-pill d-flex align-items-center justify-content-center shadow-sm fw-bold">
+                                <i class="far fa-calendar-check me-2"></i> Đặt lịch
+                              </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="service-header">
+            <div class="container">
+                <h1 class="display-5 fw-bold text-uppercase">Vệ sinh dọn dẹp</h1>
+                <p class="fs-5 opacity-75">Làm sạch chuyên nghiệp, kiến tạo không gian sống xanh.</p>
+            </div>
+        </section>
+
+        <section class="container price-section pb-5">
+            <div class="price-heading">
+                <h2>Bảng Giá Dịch Vụ</h2>
+            </div>
+            
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-broom"></i></div>
+                    <h5 class="service-title">Dọn nhà theo giờ</h5>
+                    <div class="service-price">Từ 80.000/h</div>
+                    <a href="15_dat-lich.html" class="service-btn">Dặt lịch</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-home"></i></div>
+                    <h5 class="service-title">Tổng vệ sinh nhà</h5>
+                    <div class="service-price">Từ 15.000/m²</div>
+                    <a href="15_dat-lich.html" class="service-btn">Dặt lịch</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-couch"></i></div>
+                    <h5 class="service-title">Giặt sofa, nệm, thảm</h5>
+                    <div class="service-price">Từ 300.000 VND</div>
+                    <a href="15_dat-lich.html" class="service-btn">Dặt lịch</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-window-maximize"></i></div>
+                    <h5 class="service-title">Lau kính, cửa</h5>
+                    <div class="service-price">Từ 12.000/m²</div>
+                    <a href="15_dat-lich.html" class="service-btn">Dặt lịch</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-fire"></i></div>
+                    <h5 class="service-title">Vệ sinh nhà bếp</h5>
+                    <div class="service-price">Từ 350.000 VND</div>
+                    <a href="15_dat-lich.html" class="service-btn">Dặt lịch</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-water"></i></div>
+                    <h5 class="service-title">Vệ sinh nhà vệ sinh</h5>
+                    <div class="service-price">Từ 250.000 VND</div>
+                    <a href="15_dat-lich.html" class="service-btn">Dặt lịch</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-wind"></i></div>
+                    <h5 class="service-title">Vệ sinh máy lạnh</h5>
+                    <div class="service-price">Từ 200.000 VND</div>
+                    <a href="15_dat-lich.html" class="service-btn">Dặt lịch</a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h5 class="service-title">Vệ sinh thiết bị điện</h5>
+                    <div class="service-price">Từ 50.000 VND</div>
+                    <a href="15_dat-lich.html" class="service-btn">Dặt lịch</a>
+                </div>
+                
+           
+
+            </div>
+            
+            <h2 class="fw-bold mb-4 text-center" style="color: #333; margin-top: 40px;">Cam Kết Của Chúng Tôi</h2>
+            
+            <div class="row g-4 mt-4">
+                <div class="col-md-4">
+                    <div class="commit-card" style="background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);">
+                        <i class="fas fa-shield"></i>
+                        <h5 class="fw-bold" style="color: var(--primary-color);">Sạch triệt để</h5>
+                        <p class="text-muted small">Cam kết xử lý hoàn hảo mọi vết bẩn cứng đầu nhất.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="commit-card" style="background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);">
+                        <i class="fas fa-leaf"></i>
+                        <h5 class="fw-bold" style="color: var(--primary-color);">An toàn sức khỏe</h5>
+                        <p class="text-muted small">Sử dụng dung dịch sinh học, thân thiện với sức khỏe.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="commit-card" style="background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);">
+                        <i class="fas fa-user-shield"></i>
+                        <h5 class="fw-bold" style="color: var(--primary-color);">Thợ chuẩn mực</h5>
+                        <p class="text-muted small">Đội ngũ trung thực, nhiệt tình và chuyên nghiệp.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+   <footer style="background: linear-gradient(135deg, #1a1d20, #2c3034); color: #fff; padding: 15px 0 10px; font-family: 'Segoe UI', sans-serif; font-size: 0.7rem; position: relative;">
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('images/footer-bg.png') center/cover no-repeat; opacity: 0.1;"></div>
+    <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 15px; position: relative; z-index: 1;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">
+            
+            <div style="flex: 1; min-width: 200px;">
+                <h3 style="color: #fff; font-weight: 800; margin: 0 0 5px 0; font-size: 1rem;">Thợ Ơi</h3>
+                <p style="color: #fff; margin-bottom: 8px; line-height: 1.4;">Hệ sinh thái dịch vụ tận nơi chuyên nghiệp & uy tín hàng đầu</p>
+                <div style="display: flex; gap: 15px;">
+                    <a href="#" style="color: #0d6efd; text-decoration: none; font-size: 0.9rem;"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color: #0d6efd; text-decoration: none; font-size: 0.9rem;"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div style="flex: 1; min-width: 180px;">
+                <h4 style="font-size: 0.75rem; text-transform: uppercase; margin-bottom: 8px; font-weight: 700;">LIÊN HỆ</h4>
+                <div style="color: #fff; line-height: 1.6;">
+                    <p style="margin: 0;"><i class="fas fa-link" style="width: 18px; color: #0d6efd;"></i> Website: https://thooi.vn</p>
+                    <p style="margin: 0;"><i class="fas fa-phone-alt" style="width: 18px; color: #0d6efd;"></i> Hotline: 0346 171 146</p>
+                    <p style="margin: 0;"><i class="fas fa-comment-dots" style="width: 18px; color: #0d6efd;"></i> Zalo: 0346 171 146</p>
+                    <p style="margin: 0;"><i class="fas fa-map-marker-alt" style="width: 18px; color: #0d6efd;"></i> Địa chỉ: 107 Ngự Bình, Phường An Cựu, Thành phố Huế</p>
+                </div>
+            </div>
+<div style="flex: 1; min-width: 220px; text-align: center;"> 
+                <h4 style="font-size: 0.75rem; text-transform: uppercase; margin: 0 0 4px 0; font-weight: 700; color: #fff;">TẢI ỨNG DỤNG</h4>    
+                
+                <div style="display: flex; align-items: center; justify-content: center; gap: 12px;"> 
+                    <img loading="lazy" src="images/logomoi.png" alt="Logo App" style="height: 100px; width: auto; object-fit: contain;">
+                    
+                    <div style="text-align: left;"> 
+                        <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="GP" style="height: 22px; display: block; margin-bottom: 6px;">
+                        <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="AS" style="height: 22px; display: block;">
+                    </div>
+
+                    <div style="background: #fff; padding: 4px; border-radius: 6px; line-height: 0;">
+                        <img loading="lazy" src="https://api.qrserver.com/v1/create-qr-code/?size=60x60&data=thooi" alt="QR" style="width: 50px; height: 50px;">
+                    </div>
+                </div>
+            </div>
+        </div> <div style="text-align: center; padding-top: 5px; font-size: 0.65rem; color: #fff; opacity: 0.8;">
+            <p style="margin: 0;">&copy; 2026 Thợ Ơi. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <button id="backToTop" aria-label="Lên đầu trang">↑</button>
+    <script>
+        window.onscroll = function() {
+            let btn = document.getElementById("backToTop");
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btn.style.display = "flex";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+        document.getElementById("backToTop").onclick = function() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        };
+    </script>
+</body>
+</html>

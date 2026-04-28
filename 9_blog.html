@@ -1,0 +1,401 @@
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Tin Tức & Cẩm Nang | Thợ Ơi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/shared-styles.css" rel="stylesheet">
+    
+    <style>
+        :root { --primary-color: #0d6efd; --dark-bg: #1a1d20; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f8f9fa; padding-top: 70px; }
+        * { -webkit-tap-highlight-color: transparent !important; }
+
+        /* --- NAVBAR --- */
+        header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
+        .navbar { padding: 5px 0 !important; }
+      .navbar-brand img { 
+    height: 110px !important; /* Tăng số này lên nếu muốn to hơn nữa */
+    width: auto; 
+    margin: -10px 0 !important; /* Mẹo để to ra mà không làm cao thanh menu */
+}        
+        .navbar-nav .nav-link {
+            color: #666 !important; font-weight: 500; padding: 8px 15px !important;
+            transition: 0.3s; position: relative;
+        }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: var(--primary-color) !important; font-weight: 700; }
+        
+        @media (min-width: 992px) {
+            .navbar-nav .nav-link::after {
+                content: ''; position: absolute; bottom: 0; left: 15px;
+                width: 0; height: 2px; background-color: var(--primary-color); transition: 0.3s;
+            }
+            .navbar-nav .nav-link:hover::after, .navbar-nav .nav-link.active::after { width: calc(100% - 30px); }
+        }
+
+        /* Mobile Menu */
+        @media (max-width: 991px) {
+            .custom-menu-popup { border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+            .nav-item { border-bottom: 1px solid #eee; width: 100%; text-align: center; }
+        }
+
+        .blog-header {
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.9), rgba(26, 29, 32, 0.8)), url('images/blog-bg.jpg');
+            background-size: cover; background-position: center; padding: 80px 0; color: white; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .blog-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+        .blog-header h1, .blog-header p {
+            position: relative; z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .blog-section { margin-top: -40px; position: relative; z-index: 10; }
+        .blog-card {
+            background: white; border-radius: 15px; border: none; overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 10px 30px rgba(0,0,0,0.08); height: 100%;
+        }
+        .blog-card:hover { 
+            transform: translateY(-15px) scale(1.02); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .blog-thumbnail { width: 100%; height: 200px; object-fit: cover; }
+        .blog-content { padding: 20px; }
+        .blog-meta { font-size: 0.8rem; color: var(--primary-color); font-weight: 600; margin-bottom: 10px; }
+        .blog-title { font-size: 1.15rem; font-weight: 700; color: #222; margin-bottom: 12px; line-height: 1.4; text-decoration: none; display: block; }
+        .blog-title:hover { color: var(--primary-color); }
+        .blog-excerpt { font-size: 0.9rem; color: #666; line-height: 1.6; margin-bottom: 20px; }
+        .read-more { font-size: 0.85rem; font-weight: 700; color: var(--primary-color); text-decoration: none; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .pagination .page-link { border: none; color: #666; font-weight: 600; margin: 0 5px; border-radius: 8px !important; }
+        .pagination .page-item.active .page-link { background-color: var(--primary-color); color: white; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    header {
+    position: fixed;
+    top: 0;        
+    left: 0;
+    width: 100%;    
+    z-index: 1000;  
+}
+
+body {
+    padding-top: 70px; 
+}
+
+        /* --- BUTTONS --- */
+        .btn-primary {
+            background-color: var(--primary-color) !important;
+            color: white !important; border: none !important;
+            padding: 10px 30px !important; border-radius: 50px !important;
+            font-weight: bold; transition: 0.2s !important;
+        }
+        .btn-primary:active {
+            transform: scale(0.94) !important;
+            background-color: #0b5ed7 !important;
+            opacity: 1 !important;
+        }
+          /* Back to Top */
+        #backToTop {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            width: 46px;
+            height: 46px;
+            border: none;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: #fff;
+            font-size: 24px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            z-index: 999;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        #backToTop:hover { transform: translateY(-2px); opacity: 0.95; }
+        @media (max-width: 991px) {
+    /* 1. Thu gọn chiều rộng Menu và ép cao hết màn hình */
+    .offcanvas.offcanvas-end {
+        width: 250px !important;
+        height: 100vh !important;
+        border-radius: 20px 0 0 20px !important;
+    }
+
+    /* 2. Căn giữa chữ MENU tuyệt đối */
+    .offcanvas-header {
+        display: flex !important;
+        justify-content: center !important; /* Căn giữa nội dung */
+        position: relative !important;      /* Làm gốc cho nút X */
+        padding: 15px !important;
+    }
+
+    .offcanvas-title {
+        margin: 0 !important;
+        width: 100% !important;
+        text-align: center !important;
+        font-size: 1.1rem !important;
+        font-weight: 800 !important;
+        letter-spacing: 1px;
+    }
+
+    /* 3. Đưa nút X vào góc mà không làm lệch chữ MENU */
+    .offcanvas-header .btn-close {
+        position: absolute !important;
+        right: 15px !important;
+        margin: 0 !important;
+    }
+
+    /* 4. Tối ưu danh sách Menu: Gọn, Khít, Căn giữa */
+    .offcanvas-body {
+        padding: 10px !important;
+    }
+
+    .offcanvas-body .navbar-nav {
+        flex-direction: column !important;
+        align-items: center !important; /* Căn giữa các mục menu */
+    }
+
+    .offcanvas-body .nav-link {
+        width: 100% !important;
+        text-align: center !important;
+        padding: 10px !important; /* Giảm padding để bớt dài */
+        font-size: 0.95rem !important;
+        border-bottom: 1px solid #f8f9fa; /* Đường kẻ mờ tinh tế */
+    }
+
+    /* 5. Nút Đặt lịch ngay gọn gàng */
+    .offcanvas-body .btn-primary {
+        margin-top: 15px !important;
+        width: 90% !important;
+        border-radius: 50px !important;
+        padding: 10px !important;
+        font-size: 0.9rem !important;
+    }
+}
+    </style>
+</head>
+<body>
+
+  <header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+    <div class="container d-flex align-items-center">
+      <a href="index.html" class="navbar-brand me-auto">
+        <img src="images/logomoi.png" alt="Logo" style="height: 50px; width: auto;">
+      </a>
+
+      <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="offcanvas offcanvas-end custom-menu-popup" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header border-bottom">
+          <h5 class="offcanvas-title fw-bold text-primary" id="offcanvasNavbarLabel">DANH MỤC</h5>
+          <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        
+        <div class="offcanvas-body">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item">
+              <a href="index.html" class="nav-link text-secondary">Trang chủ</a> </li>
+            <li class="nav-item">
+              <a href="2_gioi-thieu & 3_thuong-hieu.html" class="nav-link text-secondary">Giới thiệu</a>
+            </li>
+            <li class="nav-item">
+              <a href="4_dich-vu.html" class="nav-link text-secondary">Dịch vụ</a>
+            </li>
+            <li class="nav-item">
+              <a href="9_blog.html" class="nav-link active fw-bold text-primary">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a href="12_thu-vien.html" class="nav-link text-secondary">Thư viện</a>
+            </li>
+            <li class="nav-item">
+              <a href="14_doi-ngu.html" class="nav-link text-secondary">Đội ngũ</a>
+            </li>
+            <li class="nav-item">
+              <a href="13_bang-gia.html" class="nav-link text-secondary">Bảng giá</a>
+            </li>
+            
+                                        <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-secondary" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user-circle me-1"></i> Hồ sơ
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                                    <li><a class="dropdown-item" href="login.html">Đăng nhập</a></li>
+                                    <li><a class="dropdown-item" href="register.html">Đăng ký</a></li>
+                                </ul>
+                            </li>
+                        <!-- User Menu -->
+            <li class="nav-item dropdown" id="userMenu" style="display: none;">
+                <a class="nav-link dropdown-toggle text-secondary" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-circle me-1"></i>
+                    <span id="userName"></span>
+                </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <!-- Customer items -->
+                            <li class="customer-only"><a class="dropdown-item" href="order-history.html"><i class="fas fa-shopping-cart me-2"></i>Quản lý tài khoản</a></li>
+                            <li class="customer-only"><a class="dropdown-item" href="profile.html"><i class="fas fa-map-marker-alt me-2"></i>Lịch sử đặt lịch</a></li>
+                            <li class="customer-only"><a class="dropdown-item" href="profile.html"><i class="fas fa-wallet me-2"></i>Liên hệ & Hỗ trợ</a></li>
+                            <!-- Worker items -->
+                            <li class="worker-only"><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Quản lý tài khoản</a></li>
+                            <li class="worker-only"><a class="dropdown-item" href="worker-dashboard.html"><i class="fas fa-tasks me-2"></i>Quản lý công việc</a></li>
+                            <li class="worker-only"><a class="dropdown-item" href="worker-dashboard.html"><i class="fas fa-wallet me-2"></i>Thu nhập & Ví</a></li>
+                            <!-- Common -->
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="authManager.logout()"><i class="fas fa-sign-out-alt me-2"></i>Đăng xuất</a></li>
+                        </ul>            </li>
+            
+            <li class="nav-item ms-lg-4 mt-3 mt-lg-0">
+                <a href="15_dat-lich.html" class="btn btn-primary px-4 rounded-pill d-flex align-items-center justify-content-center shadow-sm fw-bold">
+                <i class="far fa-calendar-check me-2"></i> Đặt lịch
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+    <main>
+        <section class="blog-header">
+            <div class="container">
+                <h1 class="display-6 fw-bold text-uppercase">Góc Chia Sẻ & Tin Tức</h1>
+                <p class="opacity-75">Cập nhật mẹo hay và kinh nghiệm chăm sóc không gian sống mỗi ngày.</p>
+            </div>
+        </section>
+
+        <section class="container blog-section pb-5">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="blog-card">
+    <a href="10_bai-viet-1.html">
+    <img src="images/9_.jpg" class="blog-thumbnail" alt="Vệ sinh máy lạnh.">
+</a>                        <div class="blog-content">
+                            <div class="blog-meta">ĐIỆN LẠNH | 25/03/2026</div>
+                            <a href="10_bai-viet-1.html" class="blog-title">Vệ sinh máy lạnh: Khi nào cần làm và tại sao không nên chủ quan?</a>
+                            <p class="blog-excerpt">Máy lạnh kém lạnh, chảy nước hay có mùi hôi? Đó là dấu hiệu cần vệ sinh ngay để bảo vệ sức khỏe gia đình...</p>
+                            <a href="10_bai-viet-1.html" class="read-more">Xem chi tiết <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="blog-card">
+    <img src="images/9__.jpg" class="blog-thumbnail" alt="Sắp xếp nhà cửa.">
+                        <div class="blog-content">
+                            <div class="blog-meta">MẸO VẶT | 22/03/2026</div>
+                            <a href="11_bai-viet-2.html" class="blog-title">Bí kíp sắp xếp nhà cửa gọn gàng, tối ưu diện tích cho căn hộ nhỏ</a>
+                            <p class="blog-excerpt">Khám phá ngay 5 nguyên tắc "vàng" giúp biến không gian sống trở nên thoáng đãng, ngăn nắp chỉ trong nháy mắt...</p>
+                            <a href="11_bai-viet-2.html" class="read-more">Xem chi tiết <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="blog-card">
+    <img src="images/9___.jpg" class="blog-thumbnail" alt="An toàn điện.">
+                        <div class="blog-content">
+                            <div class="blog-meta">KỸ THUẬT | 20/03/2026</div>
+                            <a href="#" class="blog-title">An toàn điện gia đình: 10 nguyên tắc 'sống còn' bạn nhất định phải biết</a>
+                            <p class="blog-excerpt">Chập cháy điện là hiểm họa khôn lường. Đừng chủ quan, hãy kiểm tra ngay hệ thống điện theo các bước sau...</p>
+                            <a href="#" class="read-more">Xem chi tiết <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="mt-5">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a></li>
+                </ul>
+            </nav>
+        </section>
+    </main>
+
+     <footer style="background: linear-gradient(135deg, #1a1d20, #2c3034); color: #fff; padding: 15px 0 10px; font-family: 'Segoe UI', sans-serif; font-size: 0.7rem; position: relative;">
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('images/footer-bg.png') center/cover no-repeat; opacity: 0.1;"></div>
+    <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 15px; position: relative; z-index: 1;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">
+            
+            <div style="flex: 1; min-width: 200px;">
+                <h3 style="color: #fff; font-weight: 800; margin: 0 0 5px 0; font-size: 1rem;">Thợ Ơi</h3>
+                <p style="color: #fff; margin-bottom: 8px; line-height: 1.4;">Hệ sinh thái dịch vụ tận nơi chuyên nghiệp & uy tín hàng đầu</p>
+                <div style="display: flex; gap: 15px;">
+                    <a href="#" style="color: #0d6efd; text-decoration: none; font-size: 0.9rem;"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color: #0d6efd; text-decoration: none; font-size: 0.9rem;"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div style="flex: 1; min-width: 180px;">
+                <h4 style="font-size: 0.75rem; text-transform: uppercase; margin-bottom: 8px; font-weight: 700;">LIÊN HỆ</h4>
+                <div style="color: #fff; line-height: 1.6;">
+                    <p style="margin: 0;"><i class="fas fa-link" style="width: 18px; color: #0d6efd;"></i> Website: https://thooi.vn</p>
+                    <p style="margin: 0;"><i class="fas fa-phone-alt" style="width: 18px; color: #0d6efd;"></i> Hotline: 0346 171 146</p>
+                    <p style="margin: 0;"><i class="fas fa-comment-dots" style="width: 18px; color: #0d6efd;"></i> Zalo: 0346 171 146</p>
+                    <p style="margin: 0;"><i class="fas fa-map-marker-alt" style="width: 18px; color: #0d6efd;"></i> Địa chỉ: 107 Ngự Bình, Phường An Cựu, Thành phố Huế</p>
+                </div>
+            </div>
+<div style="flex: 1; min-width: 220px; text-align: center;"> 
+                <h4 style="font-size: 0.75rem; text-transform: uppercase; margin: 0 0 4px 0; font-weight: 700; color: #fff;">TẢI ỨNG DỤNG</h4>    
+                
+                <div style="display: flex; align-items: center; justify-content: center; gap: 12px;"> 
+                    <img loading="lazy" src="images/logomoi.png" alt="Logo App" style="height: 100px; width: auto; object-fit: contain;">
+                    
+                    <div style="text-align: left;"> 
+                        <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="GP" style="height: 22px; display: block; margin-bottom: 6px;">
+                        <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="AS" style="height: 22px; display: block;">
+                    </div>
+
+                    <div style="background: #fff; padding: 4px; border-radius: 6px; line-height: 0;">
+                        <img loading="lazy" src="https://api.qrserver.com/v1/create-qr-code/?size=60x60&data=thooi" alt="QR" style="width: 50px; height: 50px;">
+                    </div>
+                </div>
+            </div>
+        </div> <div style="text-align: center; padding-top: 5px; font-size: 0.65rem; color: #fff; opacity: 0.8;">
+            <p style="margin: 0;">&copy; 2026 Thợ Ơi. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+    <button id="backToTop" aria-label="Lên đầu trang">↑</button>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+    const backToTopBtn = document.getElementById("backToTop");
+
+    window.onscroll = function() {
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            backToTopBtn.style.display = "flex";
+        } else {
+            backToTopBtn.style.display = "none";
+        }
+    };
+
+    backToTopBtn.onclick = function() {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    };
+</script>
+</body>
+</html>

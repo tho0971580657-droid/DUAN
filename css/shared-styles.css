@@ -1,0 +1,545 @@
+:root {
+    --primary-color: #0d6efd;
+    --primary-strong: #0b5ed7;
+    --dark-bg: #1a1d20;
+    --surface: #ffffff;
+    --surface-soft: #f8f9fa;
+    --text: #212529;
+    --text-muted: #6c757d;
+    --border: rgba(13, 110, 253, 0.12);
+    --shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+#loginLink,
+#registerLink,
+#userMenu {
+    display: none !important;
+}
+
+body.auth-ready.logged-out #loginLink,
+body.auth-ready.logged-out #registerLink {
+    display: block !important;
+}
+
+body.auth-ready.logged-in #userMenu {
+    display: block !important;
+}
+
+/* Đảm bảo tất cả các thẻ đều dùng chung 1 font */
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif; /* Thay 'Ti' bằng 'Inter' */
+    background: var(--surface-soft);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding-top: 70px;
+    -webkit-font-smoothing: antialiased; /* Giúp font chữ hiển thị mượt hơn trên máy tính */
+}
+
+/* Tinh chỉnh riêng cho các tiêu đề để trông "lực" hơn */
+h1, h2, h3, h4, .fw-bold {
+    font-weight: 700;
+    letter-spacing: -0.02em; /* Thu hẹp khoảng cách chữ một chút nhìn sẽ rất "Tây" */
+}
+
+main {
+    position: relative;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1100;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+.navbar {
+    padding: 1rem 0 !important;
+}
+
+.navbar-toggler {
+    border: none !important;
+    padding: 0.35rem 0.75rem !important;
+}
+
+.navbar-toggler-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0,0,0,0.7)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
+.navbar-brand img {
+    height: 50px !important;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand img:hover {
+    transform: scale(1.02);
+}
+
+.navbar-nav .nav-link {
+    color: #5f6771 !important;
+    font-weight: 500;
+    padding: 8px 15px !important;
+    position: relative;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: var(--primary-color) !important;
+    font-weight: 700;
+}
+
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+    width: calc(100% - 30px);
+}
+
+@media (max-width: 991px) {
+    .custom-menu-popup {
+        border-radius: 20px;
+        box-shadow: 0 18px 36px rgba(0, 0, 0, 0.12);
+    }
+    .nav-item {
+        border-bottom: 1px solid #dee2e6;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.btn-primary,
+.btn-hero-primary {
+    min-height: 48px !important;
+    padding: 0.85rem 1.8rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+    border-radius: 999px !important;
+    font-weight: 700 !important;
+    transition: transform 0.24s ease, box-shadow 0.24s ease, background-color 0.24s ease !important;
+    box-shadow: 0 12px 24px rgba(13, 110, 253, 0.14);
+    will-change: transform, box-shadow !important;
+    backface-visibility: hidden !important;
+}
+
+.btn-primary:hover,
+.btn-hero-primary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 16px 32px rgba(13, 110, 253, 0.18) !important;
+}
+
+.btn-primary:active,
+.btn-hero-primary:active {
+    transform: translateY(0px) !important;
+}
+
+.btn-primary .fa-calendar-check,
+.btn-hero-primary .fa-calendar-check {
+    width: 1.1em;
+}
+
+.hero-banner,
+.service-header {
+    position: relative;
+    overflow: hidden;
+    padding: 80px 0;
+    color: #fff;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-banner::before,
+.service-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.32);
+    z-index: 1;
+}
+
+.hero-title,
+.service-header h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: 0.03em;
+    margin: 0 auto 1rem auto;
+    max-width: 100%;
+    z-index: 2;
+    position: relative;
+    text-transform: uppercase;
+}
+
+.hero-copy,
+.service-header p {
+    font-size: 1.15rem;
+    max-width: 780px;
+    margin: 0 auto;
+    opacity: 0.92;
+    z-index: 2;
+    position: relative;
+}
+
+.hero-actions,
+.hero-cta {
+    margin-top: 1.75rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    z-index: 2;
+    position: relative;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.75rem;
+}
+
+.section-subtitle {
+    color: var(--text-muted);
+    max-width: 760px;
+    margin-bottom: 2rem;
+}
+
+.price-section {
+    margin-top: -60px;
+    position: relative;
+    z-index: 10;
+    text-align: center;
+}
+
+.price-table-card {
+    background: var(--surface);
+    border-radius: 24px;
+    border: 1px solid rgba(13, 110, 253, 0.08);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    display: inline-block;
+    max-width: 95%;
+    margin: 0 auto;
+}
+
+.table {
+    width: auto !important;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.table thead th {
+    border-bottom: 2px solid #e9edf3;
+    padding: 16px 24px;
+    font-weight: 700;
+    color: #202940;
+    white-space: nowrap;
+}
+
+.table tbody td {
+    padding: 16px 24px;
+    vertical-align: middle;
+    border-bottom: 1px solid #e9edf3;
+    color: #495057;
+}
+
+.table tbody tr:nth-child(even) {
+    background: #f8f9fb;
+}
+
+.col-left {
+    text-align: left !important;
+}
+
+.col-center {
+    text-align: center !important;
+}
+
+.btn-booking,
+.btn-primary,
+.btn-hero-primary {
+    background: var(--primary-color) !important;
+    color: #fff !important;
+    border-radius: 999px !important;
+    padding: 10px 28px !important;
+    font-weight: 700 !important;
+    transition: transform 0.2s ease, background 0.2s ease !important;
+}
+
+.btn-booking:hover,
+.btn-primary:hover,
+.btn-hero-primary:hover {
+    background: var(--primary-strong) !important;
+    transform: translateY(-1px);
+}
+
+.commit-card {
+    background: var(--surface);
+    border-radius: 22px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(13, 110, 253, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.commit-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 24px 48px rgba(15, 23, 42, 0.12);
+}
+
+.commit-card i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 18px;
+}
+
+.commit-card h5 {
+    margin-bottom: 12px;
+    font-weight: 800;
+}
+
+.commit-card p {
+    color: var(--text-muted);
+}
+
+.main-footer {
+    background: var(--dark-bg);
+    color: #dee2e6;
+    padding: 40px 0 20px;
+}
+
+.footer-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 25px;
+}
+
+.footer-col {
+    flex: 1;
+    min-width: 220px;
+}
+
+.footer-brand-name {
+    color: var(--primary-color);
+    font-weight: 800;
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+}
+
+.social-icons-row a {
+    color: #fff;
+    transition: color 0.2s ease;
+}
+
+.social-icons-row a:hover {
+    color: var(--primary-color);
+}
+
+.contact-info-list li {
+    margin-bottom: 10px;
+    color: #adb5bd;
+}
+
+.app-stores img {
+    height: 35px;
+}
+
+.qr-wrapper {
+    background: #fff;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.footer-bottom-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-top: 18px;
+    font-size: 0.85rem;
+    color: #8a94a6;
+}
+
+.footer-bottom-bar div:first-child p {
+    margin: 0;
+    font-weight: 700;
+    color: #adb5bd;
+}
+
+.footer-bottom-bar div:last-child {
+    margin-top: 0;
+}
+
+#backToTop {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    width: 46px;
+    height: 46px;
+    border: none;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: #fff;
+    font-size: 24px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+#backToTop:hover {
+    transform: translateY(-2px);
+    opacity: 0.95;
+}
+
+@media (max-width: 768px) {
+    .hero-title,
+    .service-header h1 {
+        font-size: 2.4rem;
+    }
+    .hero-copy,
+    .service-header p {
+        font-size: 1rem;
+    }
+    .price-table-card,
+    .commit-card,
+    .footer-grid {
+        width: 100%;
+    }
+    .footer-bottom-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* --- CSS ĐỒNG BỘ LOGO TO KHÍT NAVBAR --- */
+
+/* 1. Đưa thanh Navbar về độ cao cố định và xóa đệm */
+.navbar {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    min-height: 60px; /* Độ cao của thanh trắng */
+    background-color: #ffffff !important;
+    display: flex;
+    align-items: center;
+}
+
+/* 2. Xóa khoảng cách của khung chứa logo */
+.navbar-brand {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+/* 3. Chỉnh kích thước Logo to khít (dùng margin âm để lấn át padding) */
+.navbar-brand img {
+    height: 75px !important; /* To hơn thanh navbar để tạo cảm giác khít sàn */
+    width: auto !important;
+    margin-top: -5px !important; 
+    margin-bottom: -5px !important;
+    object-fit: contain;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+/* 4. Điều chỉnh cho Mobile để không bị quá choán chỗ */
+@media (max-width: 991px) {
+    .navbar {
+        min-height: 55px;
+    }
+    .navbar-brand img {
+        height: 60px !important; /* Logo mobile nhỏ hơn một chút */
+        margin-top: -3px !important;
+        margin-bottom: -3px !important;
+    }
+}
+/* Tên thương hiệu: Luôn ở trên và to */
+.hero-title {
+    display: block !important;
+    text-align: center;
+    font-weight: 800;
+    text-transform: uppercase;
+    /* Máy tính 5rem, điện thoại tự co về 2.5rem */
+    font-size: clamp(2.5rem, 10vw, 5rem) !important; 
+    margin: 0 auto 10px auto;
+    color: white;
+}
+
+/* Slogan: Tuyệt đối không xuống hàng đứt quãng */
+.hero-slogan {
+    display: block !important;
+    text-align: center;
+    white-space: nowrap; /* Lệnh quan trọng nhất: Cấm xuống hàng */
+    
+    /* Tự động co giãn size chữ cực thông minh theo màn hình */
+    font-size: clamp(0.7rem, 3.8vw, 1.5rem) !important;
+    
+    width: 100%;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 auto 30px auto;
+}

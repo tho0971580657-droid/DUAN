@@ -1,0 +1,556 @@
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dịch Vụ | Sửa Chữa & Hỗ Trợ Tận Nơi 24/7</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/shared-styles.css" rel="stylesheet">
+    
+    <style>
+        :root { --primary-color: #0d6efd; --dark-bg: #1a1d20; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f8f9fa; padding-top: 70px; }
+        * { -webkit-tap-highlight-color: transparent !important; }
+
+         .navbar-brand img { 
+    height: 110px !important; /* Tăng số này lên nếu muốn to hơn nữa */
+    width: auto; 
+    margin: -10px 0 !important; /* Mẹo để to ra mà không làm cao thanh menu */
+}
+        
+        .navbar-nav .nav-link {
+            color: #666 !important; font-weight: 500; padding: 8px 15px !important;
+            transition: 0.3s; position: relative;
+        }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: var(--primary-color) !important; font-weight: 700; }
+        
+        @media (min-width: 992px) {
+            .navbar-nav .nav-link::after {
+                content: ''; position: absolute; bottom: 0; left: 15px;
+                width: 0; height: 2px; background-color: var(--primary-color); transition: 0.3s;
+            }
+            .navbar-nav .nav-link:hover::after, .navbar-nav .nav-link.active::after { width: calc(100% - 30px); }
+        }
+
+        /* Mobile Menu */
+        @media (max-width: 991px) {
+            .custom-menu-popup { border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+            .nav-item { border-bottom: 1px solid #eee; width: 100%; text-align: center; }
+        }
+
+        /* --- HERO --- */
+        .page-header { 
+            background: linear-gradient(135deg, rgba(13, 110, 253, 0.9), rgba(26, 29, 32, 0.8)), url('images/hero-bg.jpg') center/cover no-repeat; 
+            padding: 45px 0; 
+            color: white; 
+            text-align: center; 
+            position: relative; 
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+        .page-header h1 { 
+            font-size: 3.5rem; 
+            font-weight: 900; 
+            margin: 0 auto 10px auto;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease-out;
+            position: relative; z-index: 2;
+        }
+        .page-header p { 
+            font-size: 1.3rem; 
+            max-width: 780px;
+            margin: 0 auto;
+            opacity: 0.9; 
+            animation: fadeInUp 1s ease-out 0.3s both;
+            position: relative; z-index: 2;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- SERVICE CARDS --- */
+        .service-upgrade-card { 
+            border-radius: 16px; 
+            overflow: hidden; 
+            transition: all 0.3s ease; 
+            background: #fff; 
+            border: 1px solid #e7e7e7; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            position: relative;
+            animation: slideIn 0.8s ease-out forwards; 
+            opacity: 0; 
+            transform: translateY(20px);
+            min-height: 330px;
+        }
+        .service-upgrade-card:nth-child(1) { animation-delay: 0.1s; }
+        .service-upgrade-card:nth-child(2) { animation-delay: 0.2s; }
+        .service-upgrade-card:nth-child(3) { animation-delay: 0.3s; }
+        .service-upgrade-card:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes slideIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .service-upgrade-card:hover { 
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .service-upgrade-card:hover .card-img-container img {
+            transform: scale(1.1);
+        }
+        .card-img-container {
+            height: 160px;
+            position: relative;
+            overflow: hidden;
+        }
+        .card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .service-tag {
+            background: linear-gradient(45deg, #0d6efd, #0056b3);
+            color: #fff;
+            font-weight: 800;
+            font-size: 0.75rem;
+            padding: 8px 12px;
+            border-radius: 40px;
+            letter-spacing: 0.02em;
+            box-shadow: 0 5px 15px rgba(13,110,253,0.35);
+            text-transform: uppercase;
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 5;
+            animation: pulse 2s infinite;
+        }
+        .why-choose-card {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 28px;
+            background: #ffffff;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 16px 22px rgba(0, 0, 0, 0.06);
+            border-radius: 20px;
+        }
+        .why-choose-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #0d6efd;
+        }
+        .why-choose-card .why-item {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 18px 12px;
+            border-radius: 14px;
+            background: #f8fbff;
+            border: 1px solid rgba(13, 110, 253, 0.12);
+        }
+        .why-choose-card .why-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(13, 110, 253, 0.12);
+        }
+        .why-choose-card .why-item i {
+            font-size: 1.45rem;
+            color: #0d6efd;
+            margin-bottom: 0.7rem;
+        }
+        .why-choose-card .why-item h6 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* --- BUTTONS --- */
+        .btn-primary {
+            background-color: var(--primary-color) !important;
+            color: white !important; border: none !important;
+            padding: 10px 30px !important; border-radius: 50px !important;
+            font-weight: bold; transition: 0.2s !important;
+        }
+        .btn-primary:active {
+            transform: scale(0.94) !important;
+            background-color: #0b5ed7 !important;
+            opacity: 1 !important;
+        }
+        @media (max-width: 991px) {
+    /* 1. Thu gọn chiều rộng Menu và ép cao hết màn hình */
+    .offcanvas.offcanvas-end {
+        width: 250px !important;
+        height: 100vh !important;
+        border-radius: 20px 0 0 20px !important;
+    }
+
+    /* 2. Căn giữa chữ MENU tuyệt đối */
+    .offcanvas-header {
+        display: flex !important;
+        justify-content: center !important; /* Căn giữa nội dung */
+        position: relative !important;      /* Làm gốc cho nút X */
+        padding: 15px !important;
+    }
+
+    .offcanvas-title {
+        margin: 0 !important;
+        width: 100% !important;
+        text-align: center !important;
+        font-size: 1.1rem !important;
+        font-weight: 800 !important;
+        letter-spacing: 1px;
+    }
+
+    /* 3. Đưa nút X vào góc mà không làm lệch chữ MENU */
+    .offcanvas-header .btn-close {
+        position: absolute !important;
+        right: 15px !important;
+        margin: 0 !important;
+    }
+
+    /* 4. Tối ưu danh sách Menu: Gọn, Khít, Căn giữa */
+    .offcanvas-body {
+        padding: 10px !important;
+    }
+
+    .offcanvas-body .navbar-nav {
+        flex-direction: column !important;
+        align-items: center !important; /* Căn giữa các mục menu */
+    }
+
+    .offcanvas-body .nav-link {
+        width: 100% !important;
+        text-align: center !important;
+        padding: 10px !important; /* Giảm padding để bớt dài */
+        font-size: 0.95rem !important;
+        border-bottom: 1px solid #f8f9fa; /* Đường kẻ mờ tinh tế */
+    }
+
+    /* 5. Nút Đặt lịch ngay gọn gàng */
+    .offcanvas-body .btn-primary {
+        margin-top: 15px !important;
+        width: 90% !important;
+        border-radius: 50px !important;
+        padding: 10px !important;
+        font-size: 0.9rem !important;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+            <div class="container d-flex align-items-center">
+                <a href="index.html" class="navbar-brand me-auto">
+                    <img loading="lazy" src="images/logomoi.png" alt="Logo" style="height: 50px; width: auto;">
+                </a>
+
+                <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="offcanvas offcanvas-end custom-menu-popup" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header border-bottom">
+                        <h5 class="offcanvas-title fw-bold text-primary" id="offcanvasNavbarLabel">DANH MỤC</h5>
+                        <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav ms-auto align-items-center">
+                            <li class="nav-item">
+    <a href="index.html" class="nav-link text-secondary">Trang chủ</a> </li>
+                            <li class="nav-item">
+                            <a href="2_gioi-thieu & 3_thuong-hieu.html" class="nav-link text-secondary">Giới thiệu</a> </li>
+                            <li class="nav-item">
+                              <a href="4_dich-vu.html" class="nav-link active fw-bold text-primary">Dịch vụ</a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="9_blog.html" class="nav-link text-secondary">Blog</a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="12_thu-vien.html" class="nav-link text-secondary">Thư viện</a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="14_doi-ngu.html" class="nav-link text-secondary">Đội ngũ</a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="13_bang-gia.html" class="nav-link text-secondary">Bảng giá</a>
+                            </li>
+                            
+                                                        <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-secondary" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user-circle me-1"></i> Hồ sơ
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                                    <li><a class="dropdown-item" href="login.html">Đăng nhập</a></li>
+                                    <li><a class="dropdown-item" href="register.html">Đăng ký</a></li>
+                                </ul>
+                            </li>
+                        <!-- User Menu -->
+                            <li class="nav-item dropdown" id="userMenu" style="display: none;">
+                                <a class="nav-link dropdown-toggle text-secondary" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user-circle me-1"></i>
+                                    <span id="userName"></span>
+                                </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <!-- Customer items -->
+                            <li class="customer-only"><a class="dropdown-item" href="order-history.html"><i class="fas fa-shopping-cart me-2"></i>Quản lý tài khoản</a></li>
+                            <li class="customer-only"><a class="dropdown-item" href="profile.html"><i class="fas fa-map-marker-alt me-2"></i>Lịch sử đặt lịch</a></li>
+                            <li class="customer-only"><a class="dropdown-item" href="profile.html"><i class="fas fa-wallet me-2"></i>Liên hệ & Hỗ trợ</a></li>
+                            <!-- Worker items -->
+                            <li class="worker-only"><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Quản lý tài khoản</a></li>
+                            <li class="worker-only"><a class="dropdown-item" href="worker-dashboard.html"><i class="fas fa-tasks me-2"></i>Quản lý công việc</a></li>
+                            <li class="worker-only"><a class="dropdown-item" href="worker-dashboard.html"><i class="fas fa-wallet me-2"></i>Thu nhập & Ví</a></li>
+                            <!-- Common -->
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="authManager.logout()"><i class="fas fa-sign-out-alt me-2"></i>Đăng xuất</a></li>
+                        </ul>                            </li>
+                      
+                            <li class="nav-item ms-lg-4 mt-3 mt-lg-0">
+                                <a href="15_dat-lich.html" class="btn btn-primary px-4 rounded-pill d-flex align-items-center justify-content-center shadow-sm fw-bold">
+                                <i class="far fa-calendar-check me-2"></i> Đặt lịch
+                              </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1 class="display-5 fw-bold text-uppercase">Hệ Sinh Thái Dịch Vụ</h1>
+            <p class="fs-5 opacity-75">Giải pháp toàn diện cho mọi vấn đề trong ngôi nhà của bạn</p>
+        </div>
+    </section>
+
+    <main class="container py-4">
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-3">
+        
+        <div class="col">
+            <div class="service-upgrade-card shadow-sm">
+                <div class="card-img-container">
+                    <span class="service-tag">Phổ biến</span>
+                    <img loading="lazy" src="images/sua-chua.png" alt="Sửa chữa">
+                </div>
+                <div class="p-3"> <h5 class="fw-bold mb-2 h6 text-center">Điện - Nước - Kĩ thuật</h5>
+                    <p class="small text-muted mb-3">Khắc phục sự cố điện, nước tận nơi nhanh chóng, hỗ trợ các thiết bị kỹ thuật một cách linh hoạt. </p>
+                    <a href="5_sua-chua.html" class="btn btn-outline-primary btn-sm w-100 rounded-pill fw-bold">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="service-upgrade-card shadow-sm">
+                <div class="card-img-container">
+                    <img loading="lazy" src="images/ve-sinh.png" alt="Vệ sinh">
+                </div>
+                <div class="p-3">
+                    <h5 class="fw-bold mb-2 h6 text-center">Vệ sinh dọn dẹp</h5>
+                    <p class="small text-muted mb-3">Cung cấp giải pháp vệ sinh toàn diện, đảm bảo sạch sẽ và gọn gàng sau khi hoàn tất.</p>
+                    <a href="6_ve-sinh.html" class="btn btn-outline-primary btn-sm w-100 rounded-pill fw-bold">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="service-upgrade-card shadow-sm">
+                <div class="card-img-container">
+                    <img loading="lazy" src="images/viecnha.png" alt="Giúp việc">
+                </div>
+                <div class="p-3">
+                    <h5 class="fw-bold mb-2 h6 text-center">Hỗ trợ việc nhà</h5>
+                        <p class="small text-muted mb-3">Giúp việc theo giờ, hỗ trợ dọn dẹp và sinh hoạt gia đình nhanh gọn, đúng nhu cầu.</p>
+                    <a href="7_giup-viec.html" class="btn btn-outline-primary btn-sm w-100 rounded-pill fw-bold">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="service-upgrade-card shadow-sm">
+                <div class="card-img-container">
+                    <img loading="lazy" src="images/vanchuyen.png" alt="Vận chuyển">
+                </div>
+                <div class="p-3">
+                    <h5 class="fw-bold mb-2 h6 text-center">Vận chuyển - Lắp đặt</h5>
+                    <p class="small text-muted mb-3">Vận chuyển nhà ở, văn phòng và lắp đặt thiết bị, nội thất an toàn, đúng quy trình.</p>
+                    <a href="8_van-chuyen.html" class="btn btn-outline-primary btn-sm w-100 rounded-pill fw-bold">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="service-upgrade-card shadow-sm">
+                <div class="card-img-container">
+                    <img loading="lazy" src="images/8,5.jpg" alt="Sửa chữa nhà">
+                </div>
+                <div class="p-3">
+                    <h5 class="fw-bold mb-2 h6 text-center">Sửa chữa nhà</h5>
+                    <p class="small text-muted mb-3">Khắc phục, sửa chữa các hạng mục trong nhà, đảm bảo thi công gọn gàng và đúng quy trình.</p>
+                    <a href="8,5_suachuanha.html" class="btn btn-outline-primary btn-sm w-100 rounded-pill fw-bold">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+        <div class="why-choose-card text-center">
+            <h3 class="fw-bold">Tại sao nên chọn Thợ Ơi?</h3>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="why-item d-flex flex-column align-items-center justify-content-center h-100">
+                        <i class="fas fa-shield-halved"></i>
+                        <h6>Uy tín hàng đầu</h6>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="why-item d-flex flex-column align-items-center justify-content-center h-100">
+                        <i class="fas fa-bolt"></i>
+                        <h6>Phục vụ nhanh chóng</h6>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="why-item d-flex flex-column align-items-center justify-content-center h-100">
+                        <i class="fas fa-hand-holding-dollar"></i>
+                        <h6>Giá cả minh bạch</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <p class="fw-bold fs-5 mb-3">Một chạm liền tay, giải quyết ngay.</p>
+                <a href="15_dat-lich.html" class="btn btn-primary btn-lg px-5 rounded-pill shadow fw-bold">ĐẶT LỊCH NGAY</a>
+            </div>
+        </div>
+    </main>
+   <footer style="background: linear-gradient(135deg, #1a1d20, #2c3034); color: #fff; padding: 15px 0 10px; font-family: 'Segoe UI', sans-serif; font-size: 0.7rem; position: relative;">
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('images/footer-bg.png') center/cover no-repeat; opacity: 0.1;"></div>
+    <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 15px; position: relative; z-index: 1;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;">
+            
+            <div style="flex: 1; min-width: 200px;">
+                <h3 style="color: #fff; font-weight: 800; margin: 0 0 5px 0; font-size: 1rem;">Thợ Ơi</h3>
+                <p style="color: #fff; margin-bottom: 8px; line-height: 1.4;">Hệ sinh thái dịch vụ tận nơi chuyên nghiệp & uy tín hàng đầu</p>
+                <div style="display: flex; gap: 15px;">
+                    <a href="#" style="color: #0d6efd; text-decoration: none; font-size: 0.9rem;"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color: #0d6efd; text-decoration: none; font-size: 0.9rem;"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div style="flex: 1; min-width: 180px;">
+                <h4 style="font-size: 0.75rem; text-transform: uppercase; margin-bottom: 8px; font-weight: 700;">LIÊN HỆ</h4>
+                <div style="color: #fff; line-height: 1.6;">
+                    <p style="margin: 0;"><i class="fas fa-link" style="width: 18px; color: #0d6efd;"></i> Website: https://thooi.vn</p>
+                    <p style="margin: 0;"><i class="fas fa-phone-alt" style="width: 18px; color: #0d6efd;"></i> Hotline: 0346 171 146</p>
+                    <p style="margin: 0;"><i class="fas fa-comment-dots" style="width: 18px; color: #0d6efd;"></i> Zalo: 0346 171 146</p>
+                    <p style="margin: 0;"><i class="fas fa-map-marker-alt" style="width: 18px; color: #0d6efd;"></i> Địa chỉ: 107 Ngự Bình, Phường An Cựu, Thành phố Huế</p>
+                </div>
+            </div>
+<div style="flex: 1; min-width: 220px; text-align: center;"> 
+                <h4 style="font-size: 0.75rem; text-transform: uppercase; margin: 0 0 4px 0; font-weight: 700; color: #fff;">TẢI ỨNG DỤNG</h4>    
+                
+                <div style="display: flex; align-items: center; justify-content: center; gap: 12px;"> 
+                    <img loading="lazy" src="images/logomoi.png" alt="Logo App" style="height: 100px; width: auto; object-fit: contain;">
+                    
+                    <div style="text-align: left;"> 
+                        <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="GP" style="height: 22px; display: block; margin-bottom: 6px;">
+                        <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="AS" style="height: 22px; display: block;">
+                    </div>
+
+                    <div style="background: #fff; padding: 4px; border-radius: 6px; line-height: 0;">
+                        <img loading="lazy" src="https://api.qrserver.com/v1/create-qr-code/?size=60x60&data=thooi" alt="QR" style="width: 50px; height: 50px;">
+                    </div>
+                </div>
+            </div>
+        </div> <div style="text-align: center; padding-top: 5px; font-size: 0.65rem; color: #fff; opacity: 0.8;">
+            <p style="margin: 0;">&copy; 2026 Thợ Ơi. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script> 
+    <script src="js/auth.js"></script>
+    <script>
+        // Scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-upgrade-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        const style = document.createElement('style');
+        style.textContent = `
+            .animate-in {
+                animation: fadeInUp 0.8s ease-out forwards;
+            }
+            @keyframes fadeInUp {
+                from { opacity: 0; transform: translateY(30px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác nhận Đặt lịch | Thợ Ơi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/shared-styles.css" rel="stylesheet">
+    
+    <style>
+        :root { --primary-color: #0d6efd; --dark-bg: #1a1d20; --success-bg: #f2faf5; }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: #f0f2f5; 
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding-top: 70px;
+        }
+        * { -webkit-tap-highlight-color: transparent !important; }
+
+        /* --- NAVBAR --- */
+        header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
+        .navbar { padding: 5px 0 !important; }
+      .navbar-brand img { 
+    height: 110px !important; /* Tăng số này lên nếu muốn to hơn nữa */
+    width: auto; 
+    margin: -10px 0 !important; /* Mẹo để to ra mà không làm cao thanh menu */
+}        
+        .navbar-nav .nav-link {
+            color: #666 !important; font-weight: 500; padding: 8px 15px !important;
+            transition: 0.3s; position: relative;
+        }
+        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active { color: var(--primary-color) !important; font-weight: 700; }
+        
+        @media (min-width: 992px) {
+            .navbar-nav .nav-link::after {
+                content: ''; position: absolute; bottom: 0; left: 15px;
+                width: 0; height: 2px; background-color: var(--primary-color); transition: 0.3s;
+            }
+            .navbar-nav .nav-link:hover::after, .navbar-nav .nav-link.active::after { width: calc(100% - 30px); }
+        }
+
+        /* Mobile Menu */
+        @media (max-width: 991px) {
+            .custom-menu-popup { border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+            .nav-item { border-bottom: 1px solid #eee; width: 100%; text-align: center; }
+        }
+
+        .thank-you-card {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+            max-width: 550px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .thank-you-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 6px;
+            background: var(--primary-color);
+        }
+
+        .icon-box {
+            width: 90px;
+            height: 90px;
+            background: var(--success-bg);
+            color: #28a745;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+            margin: 0 auto 30px;
+            animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); opacity: 1; }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+
+        h1 { font-weight: 800; color: #1a1d20; font-size: 2rem; margin-bottom: 15px; }
+        .subtitle { color: #6c757d; font-size: 1.05rem; margin-bottom: 35px; line-height: 1.6; }
+
+        .process-steps {
+            text-align: left;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 35px;
+        }
+
+        .step { display: flex; gap: 15px; margin-bottom: 15px; }
+        .step:last-child { margin-bottom: 0; }
+        .step-icon {
+            width: 28px; height: 28px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 0.8rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+        .step-text b { color: #333; display: block; margin-bottom: 2px; }
+        .step-text span { color: #6c757d; font-size: 0.85rem; }
+
+        .btn-group { display: flex; gap: 15px; justify-content: center; }
+        
+        .btn-main {
+            background: var(--primary-color);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+            border: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-color);
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            border: 1.5px solid var(--primary-color);
+            transition: 0.3s;
+        }
+
+        .btn-main:hover, .btn-outline:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(13, 110, 253, 0.15);
+            color: inherit;
+        }
+
+.btn-primary {
+    padding: 8px 16px !important;
+    border-radius: 50px !important;
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+    color: #fff !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3 !important;
+    border-color: #0056b3 !important;
+    color: #fff !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3) !important;
+}
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+            <div class="container d-flex align-items-center">
+                <a href="index.html" class="navbar-brand me-auto">
+                    <img src="images/logomoi.png" alt="Logo" style="height: 50px; width: auto;">
+                </a>
+
+                <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="offcanvas offcanvas-end custom-menu-popup" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header border-bottom">
+                        <h5 class="offcanvas-title fw-bold text-primary" id="offcanvasNavbarLabel">DANH MỤC</h5>
+                        <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav ms-auto align-items-center">
+                            <li class="nav-item">
+    <a href="index.html" class="nav-link text-secondary">Trang chủ</a> </li>
+                            <li class="nav-item">
+                            <a href="2_gioi-thieu & 3_thuong-hieu.html" class="nav-link text-secondary">Giới thiệu</a> </li>
+                            <li class="nav-item">
+                              <a href="4_dich-vu.html" class="nav-link text-secondary">Dịch vụ</a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="9_blog.html" class="nav-link text-secondary">Blog</a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="12_thu-vien.html" class="nav-link text-secondary">Thư viện</a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="14_doi-ngu.html" class="nav-link text-secondary">Đội ngũ</a>
+                            </li>
+                            <li class="nav-item">
+                              <a href="13_bang-gia.html" class="nav-link text-secondary">Bảng giá</a>
+                            </li>
+                            
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-secondary" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user-circle me-1"></i> Hồ sơ
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                                    <li><a class="dropdown-item" href="login.html">Đăng nhập</a></li>
+                                    <li><a class="dropdown-item" href="register.html">Đăng ký</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item ms-lg-4 mt-3 mt-lg-0">
+                                <a href="15_dat-lich.html" class="btn btn-primary px-4 rounded-pill d-flex align-items-center justify-content-center shadow-sm fw-bold">
+                                <i class="far fa-calendar-check me-2"></i> Đặt lịch
+                              </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="thank-you-card">
+        <div class="icon-box">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        
+        <h1>Mọi thứ đã sẵn sàng!</h1>
+        <p class="subtitle">Yêu cầu của bạn đã được hệ thống ghi nhận. Chúng tôi sẽ kết nối bạn với nhân viên phù hợp nhất ngay bây giờ.</p>
+
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-icon">1</div>
+                <div class="step-text">
+                    <b>Xác nhận thông tin</b>
+                    <span>Tổng đài viên sẽ gọi lại sau 5-10 phút để chốt lịch.</span>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-icon">2</div>
+                <div class="step-text">
+                    <b>Điều phối thợ</b>
+                    <span>Nhân viên gần nhất sẽ chuẩn bị dụng cụ và di chuyển.</span>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-icon">3</div>
+                <div class="step-text">
+                    <b>Hoàn tất dịch vụ</b>
+                    <span>Kiểm tra, nghiệm thu và nhận phiếu bảo hành từ Thợ Ơi.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <a href="index.html" class="btn-main">Quay về trang chủ</a>
+            <a href="tel:0346171145" class="btn-outline"><i class="fas fa-phone-alt me-2"></i>Gọi Hotline</a>
+        </div>
+        
+        <p class="mt-4 mb-0" style="font-size: 0.8rem; color: #adb5bd;">Mã vận đơn của bạn: #Thợ Ơi-2026-8892</p>
+    </div>
+
+</body>
+</html>
