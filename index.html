@@ -36,24 +36,24 @@
         }
 
         /* Mobile Menu */
-       @media (max-width: 991px) {
-    /* Cho phép chữ xuống dòng nếu quá dài */
+    @media (max-width: 991px) {
     .offcanvas-body .nav-link {
-        white-space: normal !important; /* Quan trọng: giúp chữ xuống dòng */
+        white-space: normal !important;
         word-wrap: break-word !important;
         padding: 10px 15px !important;
-        line-height: 1.4 !important; /* Khoảng cách dòng vừa phải */
+        line-height: 1.4 !important;
         text-align: center !important;
         width: 100% !important;
+        position: relative !important; /* Thêm dòng này */
     }
 
-    /* Hiệu ứng gạch chân cho mục đang chọn */
     .nav-link.active::after {
         content: '';
         position: absolute;
         bottom: 2px;
-        left: 25%;
-        width: 50%;
+        left: 50%;
+        transform: translateX(-50%); /* Căn giữa tuyệt đối */
+        width: 40%;
         height: 2px;
         background-color: var(--primary-color);
     }
@@ -552,9 +552,13 @@
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
-        <div class="container d-flex align-items-center justify-content-between"> <a href="index.html" class="navbar-brand m-0">
-<img src="images/logomoi.png" alt="Logo">
-            </a>
+        <div class="container d-flex align-items-center justify-content-between">
+             <a href="index.html" class="navbar-brand m-0 d-flex flex-column align-items-center">
+    <img src="images/logomoi.png" alt="Logo">
+    <div style="font-size: 1.2rem; color: #fc6a0f; text-align: center; margin-top: -16px; font-style: italic;font-weight: bold;">
+        Gọi là có, lo là xong
+    </div>
+</a>
 
             <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
                 <span class="navbar-toggler-icon"></span>
@@ -632,10 +636,7 @@
 </header>
 <section class="hero-banner">
    <div class="container text-center">
-    <div class="hero-brand-box">
-        <h1 class="hero-title">Thợ Ơi</h1>
-        <p class="hero-slogan">Người bạn đồng hành chăm sóc gia đình bạn</p>
-    </div>
+   
     <div class="mt-4">
         <a href="15_dat-lich.html" class="btn btn-hero-primary">ĐẶT LỊCH NGAY</a>
     </div>
